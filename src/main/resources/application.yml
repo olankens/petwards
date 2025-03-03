@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: petwards
+  datasource:
+    url: jdbc:postgresql://localhost:5432/petwards
+    username: master
+    password:
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+server:
+  port: 8080
