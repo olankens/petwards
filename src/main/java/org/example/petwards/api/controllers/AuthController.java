@@ -1,4 +1,4 @@
-package org.example.petwards.api.controllers.v1;
+package org.example.petwards.api.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

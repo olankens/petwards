@@ -1,4 +1,4 @@
-package org.example.petwards.api.controllers.v1;
+package org.example.petwards.api.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
