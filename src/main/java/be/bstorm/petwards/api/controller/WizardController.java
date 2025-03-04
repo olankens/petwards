@@ -1,0 +1,10 @@
+package be.bstorm.petwards.api.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/wizard")
+public class WizardController {
+
+}
