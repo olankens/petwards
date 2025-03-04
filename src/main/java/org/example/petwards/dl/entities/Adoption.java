@@ -21,10 +21,17 @@ public class Adoption {
     private AdoptionStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "beast_id")
     @Setter
     private Beast beast;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "wizard_id")
     @Setter
     private Wizard wizard;
+
+    public Adoption(AdoptionStatus adoptionStatus) {
+        this();
+        this.status = status;
+    }
 }

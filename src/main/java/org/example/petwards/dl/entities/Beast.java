@@ -41,4 +41,13 @@ public class Beast {
             inverseJoinColumns = @JoinColumn(name = "capability_id")
     )
     private Set<Capability> capabilities = new HashSet<>();
+
+    public Beast(String name, boolean isAvailable, DangerLevel dangerLevel, Adoption adoption, Set<Capability> capability) {
+        this();
+        this.name = name;
+        this.isAvailable = isAvailable;
+        this.dangerLevel = dangerLevel;
+        this.adoption = adoption;
+        this.capabilities = capability;
+    }
 }
