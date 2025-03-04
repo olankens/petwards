@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -45,10 +46,9 @@ public class Wizard implements UserDetails {
     @Setter
     private WizardHouse house;
 
-    @ManyToOne
-    @JoinColumn(name = "adoption")
+    @OneToMany(mappedBy = "wizard", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Setter
-    private Adoption adoption;
+    private List<Adoption> adoptions = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
