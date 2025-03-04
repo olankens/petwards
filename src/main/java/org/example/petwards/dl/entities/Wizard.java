@@ -44,11 +44,13 @@ public class Wizard implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     @Setter
-    private WizardHouse house;
+    private WizardHouse wizardHouse;
 
     @OneToMany(mappedBy = "wizard", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Setter
     private List<Adoption> adoptions = new ArrayList<>();
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -58,5 +60,15 @@ public class Wizard implements UserDetails {
     @Override
     public String getUsername() {
         return this.email;
+    }
+
+    public Wizard(String firstName, String lastName, String email, ShelterRole shelterRole, WizardHouse wizardHouse) {
+        this();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.shelterRole = shelterRole;
+        this.wizardHouse = wizardHouse;
+
     }
 }
