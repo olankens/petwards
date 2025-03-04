@@ -18,7 +18,7 @@ public class Adoption {
 
     @Enumerated(EnumType.STRING)
     @Setter
-    private AdoptionStatus status;
+    private AdoptionStatus status = AdoptionStatus.PENDING;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "beast_id")
