@@ -1,4 +1,4 @@
-package be.bstorm.demospringapi.il.configs;
+package org.example.petwards.il.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
