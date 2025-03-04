@@ -13,6 +13,6 @@ public interface StaffService  {
     List<Wizard> findAll();
     void updateStaff(Long id, Wizard wizard, ShelterRole role);
     void deleteById(Long id);
-    List<Wizard> getAllStaffs(Wizard wizard, ShelterRole role);
+    List<Wizard> getAllStaffs();
 
 }

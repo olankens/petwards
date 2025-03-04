@@ -71,9 +71,7 @@ public class AdopterServiceImpl implements AdopterService {
     }
 
     @Override
-    public List<Wizard> getAllAdopters(AdoptionStatus status, Wizard wizard) {
-            List<Wizard> adopters = new ArrayList<>();
-
-            return null;
+    public List<Wizard> getAllAdopters() {
+        return wizardRepository.findAll();
     }
 }

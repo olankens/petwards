@@ -51,11 +51,7 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public List<Wizard> getAllStaffs(Wizard wizard, ShelterRole role) {
-            List<Wizard> staffs = new ArrayList<>();
-
-
-            return null;
-
+    public List<Wizard> getAllStaffs() {
+        return wizardRepository.findAll();
     }
 }
