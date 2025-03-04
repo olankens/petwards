@@ -1,6 +1,9 @@
 package org.example.petwards.api.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.example.petwards.api.models.capabilities.dtos.CapabilityDTO;
+import org.example.petwards.bll.CapabilityService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

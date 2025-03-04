@@ -1,13 +1,18 @@
 package org.example.petwards.api.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.example.petwards.api.models.CustomPage;
+import org.example.petwards.api.models.adopters.dtos.AdopterDTO;
+import org.example.petwards.bll.AdopterService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/wizard")
+@RequestMapping("/api/v1/adopter")
 public class AdopterController {
+
 
     private final AdopterService adopterService;
 

@@ -1,6 +1,10 @@
 package org.example.petwards.api.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.example.petwards.api.models.CustomPage;
+import org.example.petwards.api.models.beasts.dtos.BeastDTO;
+import org.example.petwards.dal.repositories.BeastRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 

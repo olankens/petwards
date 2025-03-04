@@ -71,4 +71,14 @@ public class Wizard implements UserDetails {
         this.wizardHouse = wizardHouse;
 
     }
+
+    public Wizard(String firstName, String lastName, String email, WizardHouse wizardHouse, String password) {
+        this();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.wizardHouse = wizardHouse;
+        this.password = password;
+
+    }
 }

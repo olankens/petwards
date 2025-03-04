@@ -1,6 +1,9 @@
 package org.example.petwards.api.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.example.petwards.api.models.shelters.dtos.ShelterDTO;
+import org.example.petwards.bll.ShelterService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 

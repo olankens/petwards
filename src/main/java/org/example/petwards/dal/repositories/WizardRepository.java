@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface WizardRepository extends JpaRepository<Wizard, Long> {
     Optional<Wizard> findById(Long id);
     boolean existsById(Long id);
+
+    Long id(Long id);
 }

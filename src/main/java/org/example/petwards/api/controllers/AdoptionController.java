@@ -1,6 +1,10 @@
 package org.example.petwards.api.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.example.petwards.api.models.CustomPage;
+import org.example.petwards.api.models.adoptions.dtos.AdoptionDTO;
+import org.example.petwards.bll.AdoptionService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

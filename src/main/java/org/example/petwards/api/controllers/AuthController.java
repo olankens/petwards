@@ -2,6 +2,10 @@ package org.example.petwards.api.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.petwards.api.models.security.dtos.WizardTokenDTO;
+import org.example.petwards.api.models.security.forms.LoginForm;
+import org.example.petwards.api.models.security.forms.RegisterForm;
+import org.example.petwards.bll.AuthService;
 import org.example.petwards.il.utils.JwtUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
