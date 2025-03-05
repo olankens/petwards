@@ -67,6 +67,7 @@ public class Wizard implements UserDetails {
         this.shelterRole = shelterRole;
     }
 
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(this.shelterRole.toString()));
@@ -76,4 +77,35 @@ public class Wizard implements UserDetails {
     public String getUsername() {
         return this.email;
     }
+
+    public Wizard(String firstName, String lastName, String email, ShelterRole shelterRole, WizardHouse wizardHouse) {
+        this();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.shelterRole = shelterRole;
+        this.wizardHouse = wizardHouse;
+
+    }
+
+    public Wizard(String firstName, String lastName, String email, WizardHouse wizardHouse, String password) {
+        this();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.wizardHouse = wizardHouse;
+        this.password = password;
+
+    }
+
+    public Wizard(String firstName, String lastName, String email, String password, WizardHouse wizardHouse) {
+        this();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.wizardHouse = wizardHouse;
+    }
+
+
 }

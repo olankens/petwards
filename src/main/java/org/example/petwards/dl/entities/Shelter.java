@@ -23,4 +23,9 @@ public class Shelter {
 
     @Setter
     private String description;
+
+    public Shelter(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 }

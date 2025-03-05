@@ -16,7 +16,7 @@ public interface AdopterService {
     void updateAdopter(Long id, Wizard wizardAdopter);
     void deleteById(Long id);
     void deleteAdopter(Long id);
-    List<Wizard> getAllAdopters(AdoptionStatus status, Wizard wizard);
+    List<Wizard> getAllAdopters();
 
 
 

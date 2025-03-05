@@ -8,11 +8,11 @@ import org.example.petwards.dl.enums.ShelterRole;
 import java.util.List;
 
 public interface StaffService  {
-    Wizard CreateWizard(Wizard wizard, ShelterRole role);
+    Wizard createStaff(Wizard wizard);
     Wizard findById(Long id);
     List<Wizard> findAll();
-    void updateStaff(Long id, Wizard wizard, ShelterRole role);
+    void updateStaff(Long id, Wizard wizard);
     void deleteById(Long id);
-    List<Wizard> getAllStaffs(Wizard wizard, ShelterRole role);
+    List<Wizard> getAllStaffs();
 
 }

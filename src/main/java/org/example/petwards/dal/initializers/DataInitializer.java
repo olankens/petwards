@@ -2,14 +2,8 @@ package org.example.petwards.dal.initializers;
 
 
 import lombok.RequiredArgsConstructor;
-import org.example.petwards.dal.repositories.AdoptionRepository;
-import org.example.petwards.dal.repositories.BeastRepository;
-import org.example.petwards.dal.repositories.CapabilityRepository;
-import org.example.petwards.dal.repositories.WizardRepository;
-import org.example.petwards.dl.entities.Adoption;
-import org.example.petwards.dl.entities.Beast;
-import org.example.petwards.dl.entities.Capability;
-import org.example.petwards.dl.entities.Wizard;
+import org.example.petwards.dal.repositories.*;
+import org.example.petwards.dl.entities.*;
 import org.example.petwards.dl.enums.AdoptionStatus;
 import org.example.petwards.dl.enums.DangerLevel;
 import org.example.petwards.dl.enums.ShelterRole;
@@ -29,12 +23,14 @@ public class DataInitializer implements CommandLineRunner {
     private final BeastRepository beastRepository;
     private final CapabilityRepository capabilityRepository;
     private final AdoptionRepository adoptionRepository;
+    private final ShelterRepository shelterRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
         saveDefaultWizards();
         saveDefaultBeasts();
+        saveDefaultShelters();
     }
 
     public void saveDefaultWizards() {
@@ -64,7 +60,7 @@ public class DataInitializer implements CommandLineRunner {
 
             //Adoption
             Adoption adoption = new Adoption(AdoptionStatus.PENDING);
-            adoption = adoptionRepository.save(adoption);
+            adoptionRepository.save(adoption);
 
             //Beast
             List<Beast> beasts = List.of(
@@ -75,5 +71,10 @@ public class DataInitializer implements CommandLineRunner {
             );
             beastRepository.saveAll(beasts);
         }
+    }
+
+    public void saveDefaultShelters() {
+        Shelter shelter = new Shelter("petward", "Centre d'adoption de créature magique en perdition");
+        shelterRepository.save(shelter);
     }
 }
