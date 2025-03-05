@@ -2,14 +2,8 @@ package org.example.petwards.dal.initializers;
 
 
 import lombok.RequiredArgsConstructor;
-import org.example.petwards.dal.repositories.AdoptionRepository;
-import org.example.petwards.dal.repositories.BeastRepository;
-import org.example.petwards.dal.repositories.CapabilityRepository;
-import org.example.petwards.dal.repositories.WizardRepository;
-import org.example.petwards.dl.entities.Adoption;
-import org.example.petwards.dl.entities.Beast;
-import org.example.petwards.dl.entities.Capability;
-import org.example.petwards.dl.entities.Wizard;
+import org.example.petwards.dal.repositories.*;
+import org.example.petwards.dl.entities.*;
 import org.example.petwards.dl.enums.AdoptionStatus;
 import org.example.petwards.dl.enums.DangerLevel;
 import org.example.petwards.dl.enums.ShelterRole;
@@ -28,22 +22,26 @@ public class DataInitializer implements CommandLineRunner {
     private final BeastRepository beastRepository;
     private final CapabilityRepository capabilityRepository;
     private final AdoptionRepository adoptionRepository;
+    private final ShelterRepository shelterRepository;
 
     @Override
     public void run(String... args) throws Exception {
         saveDefaultWizards();
         saveDefaultBeasts();
+        saveDefaultShelters();
     }
 
     public void saveDefaultWizards() {
         if (wizardRepository.count() == 0) {
-            Wizard wizard = new Wizard("albus wilfred percival brian", "Dumbledore", "dumby@gmail.mag", ShelterRole.ADMIN, WizardHouse.GRYFFINDOR);
-            wizardRepository.save(wizard);
+            List<Wizard> wizards = List.of(
+                    new Wizard("albus wilfred percival brian", "Dumbledore", "dumby@gmail.mag", ShelterRole.ADMIN, WizardHouse.GRYFFINDOR),
+                    new Wizard("test", "test", "test@petward.h", ShelterRole.STAFF, WizardHouse.SLYTHERIN));
+            wizardRepository.saveAll(wizards);
         }
     }
 
-    public void saveDefaultBeasts(){
-        if (beastRepository.count() == 0){
+    public void saveDefaultBeasts() {
+        if (beastRepository.count() == 0) {
             //Capability
             Set<Capability> capabilities = Set.of(
                     new Capability("fire"),
@@ -55,16 +53,21 @@ public class DataInitializer implements CommandLineRunner {
 
             //Adoption
             Adoption adoption = new Adoption(AdoptionStatus.PENDING);
-            adoption = adoptionRepository.save(adoption);
+            adoptionRepository.save(adoption);
 
             //Beast
             List<Beast> beasts = List.of(
-                    new Beast("Smaug", true, DangerLevel.INSANE,adoption,capabilities ),
+                    new Beast("Smaug", true, DangerLevel.INSANE, adoption, capabilities),
                     new Beast("Phoenix des Glace", true, DangerLevel.HIGH, adoption, capabilities),
                     new Beast("Dylan", true, DangerLevel.LOW, adoption, capabilities),
-                    new Beast("Croutard",true,DangerLevel.MEDIUM, adoption, capabilities)
+                    new Beast("Croutard", true, DangerLevel.MEDIUM, adoption, capabilities)
             );
             beastRepository.saveAll(beasts);
         }
+    }
+
+    public void saveDefaultShelters() {
+        Shelter shelter = new Shelter("petward", "Centre d'adoption de créature magique en perdition");
+        shelterRepository.save(shelter);
     }
 }
