@@ -8,7 +8,7 @@ public record AdopterDTO(
         String fullName,
         ShelterRole shelterRole
 ) {
-    public static AdopterDTO fromWizardStaff(Wizard wizard) {
+    public static AdopterDTO fromWizardAdopter(Wizard wizard) {
         String fullName = wizard.getLastName() + " " + wizard.getFirstName();
         return new AdopterDTO(wizard.getId(), fullName, wizard.getShelterRole());
     }

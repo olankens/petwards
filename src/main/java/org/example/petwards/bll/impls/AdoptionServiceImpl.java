@@ -63,6 +63,12 @@ public class AdoptionServiceImpl implements AdoptionService {
     }
 
     @Override
+    public List<Adoption> getApproveAdoption() {
+        return adoptionRepository.findByStatus(AdoptionStatus.APPROVED);
+    }
+
+
+    @Override
     public void approveAdoption(Long id) {
         Adoption adoption = findById(id);
         adoption.setStatus(AdoptionStatus.APPROVED);

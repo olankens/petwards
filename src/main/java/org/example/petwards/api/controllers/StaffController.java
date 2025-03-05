@@ -57,7 +57,7 @@ public class StaffController {
     }
     
 
-    //    @PreAuthorize("hasAnyRole('STAFF', 'ADMIN')")
+        @PreAuthorize("hasAnyRole('STAFF', 'ADMIN')")
     @PostMapping
     public ResponseEntity<StaffDTO> createStaff(
             @RequestBody @Valid StaffForm staffForm
@@ -69,7 +69,7 @@ public class StaffController {
 
     }
 
-    //    @PreAuthorize("hasAnyRole('STAFF', 'ADMIN')")
+        @PreAuthorize("hasAnyRole('STAFF', 'ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<StaffDTO> updateStaff(
             @PathVariable Long id,

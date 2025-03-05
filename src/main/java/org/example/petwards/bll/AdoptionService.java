@@ -13,6 +13,7 @@ public interface AdoptionService {
     void update(Long id, Adoption adoption);
     void deleteById(Long id);
     List<Adoption> getPendingAdoption();
+    List<Adoption> getApproveAdoption();
     void approveAdoption(Long id);
     void rejectAdoption(Long id);
 }
