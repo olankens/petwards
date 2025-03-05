@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.example.petwards.bll.CapabilityService;
 import org.example.petwards.dal.repositories.CapabilityRepository;
 import org.example.petwards.dl.entities.Capability;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -32,8 +34,8 @@ public class CapabilityServiceImpl implements CapabilityService {
     }
 
     @Override
-    public List<Capability> findAll() {
-        return capabilityRepository.findAll();
+    public Page<Capability> findAll(Pageable pageable) {
+        return capabilityRepository.findAll(pageable);
     }
 
     @Override
