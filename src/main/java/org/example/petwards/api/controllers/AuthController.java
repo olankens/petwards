@@ -2,14 +2,19 @@ package org.example.petwards.api.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.petwards.api.models.security.dtos.WizardSessionDTO;
 import org.example.petwards.api.models.security.dtos.WizardTokenDTO;
 import org.example.petwards.api.models.security.forms.LoginForm;
 import org.example.petwards.api.models.security.forms.RegisterForm;
 import org.example.petwards.bll.AuthService;
+import org.example.petwards.dl.entities.Wizard;
 import org.example.petwards.il.utils.JwtUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,11 +27,12 @@ public class AuthController {
     @PreAuthorize("isAnonymous()")
     @PostMapping("/register")
     public ResponseEntity<Void> register(
-            @Valid @RequestPart("form") RegisterForm form
+            @Valid @RequestBody() RegisterForm form
     ) {
-        // INFO: Only adopters can be registered
-        // as staff can only be created by admin and other staffs
-        throw new UnsupportedOperationException("Not implemented yet");
+        // INFO: Only adopters can be registered via this endpoint
+        // as a staff can only be created by the admin or other staffs
+        authService.register(form.toWizard());
+        return ResponseEntity.noContent().build();
     }
 
     @PreAuthorize("isAnonymous()")
@@ -34,7 +40,11 @@ public class AuthController {
     public ResponseEntity<WizardTokenDTO> login(
             @Valid @RequestBody LoginForm form
     ) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Wizard wizard = authService.login(form.email(), form.password());
+        WizardSessionDTO sessionDTO = WizardSessionDTO.fromWizard(wizard);
+        String token = jwtUtil.generateToken(wizard);
+        WizardTokenDTO wizardTokenDTO = new WizardTokenDTO(sessionDTO, token);
+        return ResponseEntity.ok(wizardTokenDTO);
     }
 }
 

@@ -50,7 +50,22 @@ public class Wizard implements UserDetails {
     @Setter
     private List<Adoption> adoptions = new ArrayList<>();
 
+    public Wizard(String firstName, String lastName, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+    }
 
+    public Wizard(String firstName, String lastName, String email, String password, WizardHouse wizardHouse) {
+        this(firstName, lastName, email, password);
+        this.wizardHouse = wizardHouse;
+    }
+
+    public Wizard(String firstName, String lastName, String email, String password, WizardHouse wizardHouse, ShelterRole shelterRole) {
+        this(firstName, lastName, email, password, wizardHouse);
+        this.shelterRole = shelterRole;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -60,25 +75,5 @@ public class Wizard implements UserDetails {
     @Override
     public String getUsername() {
         return this.email;
-    }
-
-    public Wizard(String firstName, String lastName, String email, ShelterRole shelterRole, WizardHouse wizardHouse) {
-        this();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.shelterRole = shelterRole;
-        this.wizardHouse = wizardHouse;
-
-    }
-
-    public Wizard(String firstName, String lastName, String email, WizardHouse wizardHouse, String password) {
-        this();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.wizardHouse = wizardHouse;
-        this.password = password;
-
     }
 }
