@@ -15,6 +15,7 @@ import org.example.petwards.dl.enums.ShelterRole;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.AuthenticatedPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,11 +28,12 @@ public class StaffController {
 
     private final StaffService staffService;
 
-    //    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
+    @PreAuthorize("hasAnyRole('STAFF', 'ADMIN')")
     @GetMapping
     public ResponseEntity<CustomPage<StaffDTO>> getAllStaffs(
             @RequestParam(required = false, defaultValue = "1") int page,
             @RequestParam(required = false, defaultValue = "10") int size
+
 
     ) {
         List<Wizard> wizards = staffService.findAll();
@@ -42,11 +44,10 @@ public class StaffController {
 //        throw new UnsupportedOperationException("Not implemented yet");
     }
 
-    //    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<StaffDTO> findById(
             @PathVariable long id
-
     ){
         try{
             Wizard wizard = staffService.findById(id);

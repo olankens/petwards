@@ -9,6 +9,7 @@ import org.example.petwards.dl.entities.Adoption;
 import org.example.petwards.dl.enums.AdoptionStatus;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class AdoptionController {
 
     private final AdoptionService adoptionService;
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
     @GetMapping("/pending")
     public ResponseEntity<CustomPage<AdoptionDTO>> getPendingAdoptions(
             @RequestParam(required = false, defaultValue = "1") int page,
@@ -35,6 +37,7 @@ public class AdoptionController {
     }
 
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
     @GetMapping("/approved")
     public ResponseEntity<CustomPage<AdoptionDTO>> getApprovedAdoptions(
             @RequestParam(required = false, defaultValue = "1") int page,
@@ -62,6 +65,7 @@ public class AdoptionController {
 //
 //    }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
     @PutMapping("/approve/{id}")
     public ResponseEntity<AdoptionDTO> approveAdoption(
             @PathVariable Long id,
@@ -92,19 +96,20 @@ public class AdoptionController {
 //        }
 //
 //    }
-@PutMapping("/reject/{id}")
-public ResponseEntity<AdoptionDTO> rejectAdoption(
-        @PathVariable Long id,
-        @RequestParam String adoptionEmail
-) {
-    try {
-        // Appeler le service pour rejeter l'adoption et envoyer l'email
-        Adoption adoption = adoptionService.rejectAdoption(id, adoptionEmail);
+    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
+    @PutMapping("/reject/{id}")
+    public ResponseEntity<AdoptionDTO> rejectAdoption(
+            @PathVariable Long id,
+            @RequestParam String adoptionEmail
+    ) {
+        try {
+            // Appeler le service pour rejeter l'adoption et envoyer l'email
+            Adoption adoption = adoptionService.rejectAdoption(id, adoptionEmail);
 
-        // Retourner la réponse avec l'adoption mise à jour
-        return new ResponseEntity<>(AdoptionDTO.fromAdoption(adoption), HttpStatus.OK);
-    } catch (AdoptionNotFoundException e) {
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            // Retourner la réponse avec l'adoption mise à jour
+            return new ResponseEntity<>(AdoptionDTO.fromAdoption(adoption), HttpStatus.OK);
+        } catch (AdoptionNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
-}
 }
