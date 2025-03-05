@@ -1,13 +1,9 @@
 package org.example.petwards.api.models.security.forms;
 
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.example.petwards.dl.entities.Wizard;
-import org.example.petwards.dl.enums.ShelterRole;
 import org.example.petwards.dl.enums.WizardHouse;
-
-import java.time.LocalDate;
 
 public record RegisterForm(
         @NotBlank @Size(max = 150)
@@ -18,7 +14,6 @@ public record RegisterForm(
         String firstName,
         @NotBlank @Size(max = 80)
         String lastName,
-        @NotBlank
         WizardHouse wizardHouse
 ) {
 
@@ -27,11 +22,8 @@ public record RegisterForm(
                 this.firstName,
                 this.lastName,
                 this.email,
-                this.wizardHouse,
-                this.password
-
-
-
+                this.password,
+                this.wizardHouse
         );
     }
 }

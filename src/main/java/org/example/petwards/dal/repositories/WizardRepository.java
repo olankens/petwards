@@ -8,8 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface WizardRepository extends JpaRepository<Wizard, Long> {
-    Optional<Wizard> findById(Long id);
-    boolean existsById(Long id);
+    Optional<Wizard> findByEmail(String email);
 
-    Long id(Long id);
+    boolean existsByEmail(String email);
 }

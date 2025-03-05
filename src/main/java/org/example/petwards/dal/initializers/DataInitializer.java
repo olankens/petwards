@@ -15,6 +15,7 @@ import org.example.petwards.dl.enums.DangerLevel;
 import org.example.petwards.dl.enums.ShelterRole;
 import org.example.petwards.dl.enums.WizardHouse;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public class DataInitializer implements CommandLineRunner {
     private final BeastRepository beastRepository;
     private final CapabilityRepository capabilityRepository;
     private final AdoptionRepository adoptionRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
@@ -37,13 +39,20 @@ public class DataInitializer implements CommandLineRunner {
 
     public void saveDefaultWizards() {
         if (wizardRepository.count() == 0) {
-            Wizard wizard = new Wizard("albus wilfred percival brian", "Dumbledore", "dumby@gmail.mag", ShelterRole.ADMIN, WizardHouse.GRYFFINDOR);
+            Wizard wizard = new Wizard(
+                    "Albus Wilfred Percival Brian",
+                    "Dumbledore",
+                    "admin@gmail.com",
+                    passwordEncoder.encode("admin"),
+                    WizardHouse.GRYFFINDOR,
+                    ShelterRole.ADMIN
+            );
             wizardRepository.save(wizard);
         }
     }
 
-    public void saveDefaultBeasts(){
-        if (beastRepository.count() == 0){
+    public void saveDefaultBeasts() {
+        if (beastRepository.count() == 0) {
             //Capability
             Set<Capability> capabilities = Set.of(
                     new Capability("fire"),
@@ -59,10 +68,10 @@ public class DataInitializer implements CommandLineRunner {
 
             //Beast
             List<Beast> beasts = List.of(
-                    new Beast("Smaug", true, DangerLevel.INSANE,adoption,capabilities ),
+                    new Beast("Smaug", true, DangerLevel.INSANE, adoption, capabilities),
                     new Beast("Phoenix des Glace", true, DangerLevel.HIGH, adoption, capabilities),
                     new Beast("Dylan", true, DangerLevel.LOW, adoption, capabilities),
-                    new Beast("Croutard",true,DangerLevel.MEDIUM, adoption, capabilities)
+                    new Beast("Croutard", true, DangerLevel.MEDIUM, adoption, capabilities)
             );
             beastRepository.saveAll(beasts);
         }

@@ -1,7 +1,7 @@
 package org.example.petwards.api.models.security.dtos;
 
 public record WizardTokenDTO(
-        UserSessionDTO user,
+        WizardSessionDTO wizard,
         String token
 ) {
 }
