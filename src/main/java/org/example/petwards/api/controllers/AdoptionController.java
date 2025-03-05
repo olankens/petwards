@@ -47,31 +47,64 @@ public class AdoptionController {
         return ResponseEntity.ok(new CustomPage<>(adoptionDTOs, page, size));
     }
 
+//    @PutMapping("/approve/{id}")
+//    public ResponseEntity<AdoptionDTO> approveAdoption(
+//            @PathVariable Long id,
+//            @RequestParam String adoptionEmail
+//    ) {
+//        try{
+//            Adoption adoption = adoptionService.findById(id);
+//            adoption.setStatus(AdoptionStatus.APPROVED);
+//            return new ResponseEntity<>(AdoptionDTO.fromAdoption(adoption), HttpStatus.OK);
+//        }catch (AdoptionNotFoundException e) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//
+//    }
+
     @PutMapping("/approve/{id}")
     public ResponseEntity<AdoptionDTO> approveAdoption(
-            @PathVariable Long id
+            @PathVariable Long id,
+            @RequestParam String adoptionEmail
     ) {
-        try{
-            Adoption adoption = adoptionService.findById(id);
-            adoption.setStatus(AdoptionStatus.APPROVED);
+        try {
+            // Appeler le service pour approuver l'adoption et envoyer l'email
+            Adoption adoption = adoptionService.approveAdoption(id, adoptionEmail);
+
+            // Retourner la réponse avec l'adoption mise à jour
             return new ResponseEntity<>(AdoptionDTO.fromAdoption(adoption), HttpStatus.OK);
-        }catch (AdoptionNotFoundException e) {
+        } catch (AdoptionNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
     }
 
-    @PutMapping("/reject/{id}")
-    public ResponseEntity<AdoptionDTO> rejectAdoption(
-            @PathVariable Long id
-    ) {
-        try{
-            Adoption adoption = adoptionService.findById(id);
-            adoption.setStatus(AdoptionStatus.REJECTED);
-            return new ResponseEntity<>(AdoptionDTO.fromAdoption(adoption), HttpStatus.OK);
-        }catch (AdoptionNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+//    @PutMapping("/reject/{id}")
+//    public ResponseEntity<AdoptionDTO> rejectAdoption(
+//            @PathVariable Long id,
+//            @RequestParam String adoptionEmail
+//    ) {
+//        try{
+//            Adoption adoption = adoptionService.findById(id);
+//            adoption.setStatus(AdoptionStatus.REJECTED);
+//            return new ResponseEntity<>(AdoptionDTO.fromAdoption(adoption), HttpStatus.OK);
+//        }catch (AdoptionNotFoundException e) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//
+//    }
+@PutMapping("/reject/{id}")
+public ResponseEntity<AdoptionDTO> rejectAdoption(
+        @PathVariable Long id,
+        @RequestParam String adoptionEmail
+) {
+    try {
+        // Appeler le service pour rejeter l'adoption et envoyer l'email
+        Adoption adoption = adoptionService.rejectAdoption(id, adoptionEmail);
 
+        // Retourner la réponse avec l'adoption mise à jour
+        return new ResponseEntity<>(AdoptionDTO.fromAdoption(adoption), HttpStatus.OK);
+    } catch (AdoptionNotFoundException e) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+}
 }

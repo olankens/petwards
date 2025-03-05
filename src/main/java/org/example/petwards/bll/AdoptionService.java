@@ -14,6 +14,6 @@ public interface AdoptionService {
     void deleteById(Long id);
     List<Adoption> getPendingAdoption();
     List<Adoption> getApproveAdoption();
-    void approveAdoption(Long id);
-    void rejectAdoption(Long id);
+    Adoption approveAdoption(Long id, String adoptionEmail);
+    Adoption rejectAdoption(Long id, String adoptionEmail);
 }
