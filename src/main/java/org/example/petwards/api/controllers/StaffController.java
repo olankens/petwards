@@ -28,7 +28,7 @@ public class StaffController {
 
     private final StaffService staffService;
 
-    @PreAuthorize("hasAnyRole('STAFF', 'ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('STAFF')")
     @GetMapping
     public ResponseEntity<CustomPage<StaffDTO>> getAllStaffs(
             @RequestParam(required = false, defaultValue = "1") int page,
@@ -56,9 +56,9 @@ public class StaffController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    
 
-        @PreAuthorize("hasAnyRole('STAFF', 'ADMIN')")
+
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('STAFF')")
     @PostMapping
     public ResponseEntity<StaffDTO> createStaff(
             @RequestBody @Valid StaffForm staffForm
@@ -70,7 +70,7 @@ public class StaffController {
 
     }
 
-        @PreAuthorize("hasAnyRole('STAFF', 'ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('STAFF')")
     @PutMapping("/{id}")
     public ResponseEntity<StaffDTO> updateStaff(
             @PathVariable Long id,

@@ -16,7 +16,7 @@ public class AdopterController {
 
     private final AdopterService adopterService;
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('STAFF')")
     @GetMapping
     public ResponseEntity<CustomPage<AdopterDTO>> getAllAdopters(
             @RequestParam(required = false, defaultValue = "1") int page,
@@ -25,7 +25,7 @@ public class AdopterController {
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'ADOPTER', 'STAFF')")
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('STAFF')")
     @PutMapping("/{id}")
     public ResponseEntity<AdopterDTO> updateAdopter(
             @PathVariable Long id,

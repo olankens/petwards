@@ -22,7 +22,7 @@ public class AdoptionController {
 
     private final AdoptionService adoptionService;
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('STAFF')")
     @GetMapping("/pending")
     public ResponseEntity<CustomPage<AdoptionDTO>> getPendingAdoptions(
             @RequestParam(required = false, defaultValue = "1") int page,
@@ -37,7 +37,7 @@ public class AdoptionController {
     }
 
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('STAFF')")
     @GetMapping("/approved")
     public ResponseEntity<CustomPage<AdoptionDTO>> getApprovedAdoptions(
             @RequestParam(required = false, defaultValue = "1") int page,
@@ -65,7 +65,7 @@ public class AdoptionController {
 //
 //    }
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('STAFF')")
     @PutMapping("/approve/{id}")
     public ResponseEntity<AdoptionDTO> approveAdoption(
             @PathVariable Long id,
@@ -96,7 +96,7 @@ public class AdoptionController {
 //        }
 //
 //    }
-    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
+@PreAuthorize("hasAuthority('ADMIN') || hasAuthority('STAFF')")
     @PutMapping("/reject/{id}")
     public ResponseEntity<AdoptionDTO> rejectAdoption(
             @PathVariable Long id,

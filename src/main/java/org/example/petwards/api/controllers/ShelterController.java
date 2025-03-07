@@ -20,7 +20,8 @@ public class ShelterController {
 
     private final ShelterService shelterService;
 
-    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('STAFF')")
+
     @GetMapping
     public ResponseEntity<List<ShelterDTO>> getAllShelters() {
         List<Shelter> shelters = shelterService.findAll();
@@ -30,7 +31,7 @@ public class ShelterController {
         return new ResponseEntity<>(shelterDTOs, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('STAFF')")
     @GetMapping("/{id}")
     public ResponseEntity<ShelterDTO> getShelterById(@PathVariable Long id) {
         try {
@@ -43,7 +44,7 @@ public class ShelterController {
 
 
 
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<ShelterDTO> updateShelter(
             @PathVariable Long id,
