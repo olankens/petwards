@@ -1,10 +1,13 @@
 package org.example.petwards.api.controllers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.petwards.api.models.CustomPage;
 import org.example.petwards.api.models.beasts.dtos.BeastDTO;
+import org.example.petwards.api.models.beasts.forms.BeastForm;
 import org.example.petwards.api.models.capabilities.dtos.CapabilityDTO;
 import org.example.petwards.bll.BeastService;
+import org.example.petwards.bll.exceptions.BeastNotFoundException;
 import org.example.petwards.bll.exceptions.ShelterNotFoundException;
 import org.example.petwards.dal.repositories.BeastRepository;
 import org.example.petwards.dl.entities.Beast;
@@ -26,26 +29,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/beast")
 public class BeastController {
 
-    private final BeastRepository beastRepository;
     private final BeastService beastService;
 
-//    @GetMapping
-//    public ResponseEntity<CustomPage<BeastDTO>> getAllBeast(
-//            @RequestParam(required = false, defaultValue = "1") int page,
-//            @RequestParam(required = false, defaultValue = "5") int size
-//            // TODO: Add filter by name
-//            // TODO: Add filter by capability list
-//    ) {
-//        Page<Beast> beasts = beastService.findAll(PageRequest.of(
-//                page - 1, size, Sort.by(Sort.Direction.ASC, "id")
-//        ));
-//        List<BeastDTO> beastsDTOs = beasts.getContent().stream()
-//                .map(BeastDTO::fromBeast)
-//                .toList();
-//        CustomPage<BeastDTO> result = new CustomPage<>(beastsDTOs, beasts.getTotalPages(), beasts.getNumber() + 1);
-//        ResponseEntity<CustomPage<BeastDTO>> responseResult = ResponseEntity.ok(result);
-//        return responseResult;
-//    }
 
     @GetMapping
     public ResponseEntity<CustomPage<BeastDTO>> getBeastsByNameAndCapabilities(
@@ -71,7 +56,7 @@ public class BeastController {
         try {
             Beast beast = beastService.findById(id);
             return new ResponseEntity<>(BeastDTO.fromBeast(beast), HttpStatus.OK);
-        } catch (ShelterNotFoundException e) {
+        } catch ( BeastNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -79,23 +64,33 @@ public class BeastController {
     @PreAuthorize("hasAnyAuthority('ADMIN', 'STAFF')")
     @PostMapping
     public ResponseEntity<BeastDTO> createBeast(
-            @RequestBody BeastDTO beastDTO
+            @Valid @RequestBody BeastForm beastForm
     ) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Beast beast = beastForm.toBeast();
+        beastService.createBeast(beast);
+        return ResponseEntity.noContent().build();
+
     }
+
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'STAFF')")
     @PutMapping("/{id}")
     public ResponseEntity<BeastDTO> updateBeast(
             @PathVariable Long id,
-            @RequestBody BeastDTO beastDTO
+            @RequestBody @Valid BeastForm beastForm
     ) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Beast beast = beastForm.toBeast();
+        beastService.updateBeast(id, beast);
+        return ResponseEntity.noContent().build();
     }
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'STAFF')")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBeast(@PathVariable Long id) {
-        throw new UnsupportedOperationException("Not implemented yet");
+    public ResponseEntity<Void> deleteBeast(
+            @PathVariable Long id
+    ) {
+        beastService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
+
 }

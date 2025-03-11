@@ -1,6 +1,8 @@
 package org.example.petwards.dl.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.example.petwards.dl.enums.DangerLevel;
 
@@ -49,5 +51,11 @@ public class Beast {
         this.dangerLevel = dangerLevel;
         this.adoptions = adoptions;
         this.capabilities = capability;
+    }
+
+    public Beast( String name, Boolean isAvailable, DangerLevel dangerLevel) {
+        this.name = name;
+        this.isAvailable = isAvailable;
+        this.dangerLevel = dangerLevel;
     }
 }

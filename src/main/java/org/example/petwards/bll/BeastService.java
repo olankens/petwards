@@ -16,8 +16,9 @@ public interface BeastService {
     Beast findById(Long id);
     Page<Beast> findAll(Pageable pageable);
     Page<Beast> findAllByNameAndCapability(Pageable pageable, String name, List<String> capabilities);
-    void update(Long id, Beast beast);
+    void updateBeast(Long id, Beast beast);
     void deleteById(Long id);
     public void addCapabilityToBeast(Long beastId, Long capabilityId);
     public void removeCapabilityFromBeast(Long beastId, Long capabilityId);
+    Beast createBeast(Beast beast);
 }
