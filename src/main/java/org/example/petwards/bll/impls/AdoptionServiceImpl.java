@@ -5,7 +5,7 @@ import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.example.petwards.bll.AdoptionService;
 import org.example.petwards.bll.EmailService;
-import org.example.petwards.bll.exceptions.AdoptionNotFoundException;
+import org.example.petwards.bll.exceptions.PetwardsAdoptionNotFoundException;
 import org.example.petwards.dal.repositories.AdoptionRepository;
 import org.example.petwards.dl.entities.Adoption;
 import org.example.petwards.dl.enums.AdoptionStatus;
@@ -97,7 +97,7 @@ public class AdoptionServiceImpl implements AdoptionService {
 
     public Adoption approveAdoption(Long adoptionId) {
         Adoption adoption = adoptionRepository.findById(adoptionId)
-                .orElseThrow(() -> new AdoptionNotFoundException("Adoption not found"));
+                .orElseThrow(() -> new PetwardsAdoptionNotFoundException("Adoption not found"));
 
         adoption.setStatus(AdoptionStatus.APPROVED); // Mettre à jour le statut de l'adoption
         adoptionRepository.save(adoption);
@@ -132,7 +132,7 @@ public class AdoptionServiceImpl implements AdoptionService {
 
     public Adoption rejectAdoption(Long adoptionId) {
         Adoption adoption = adoptionRepository.findById(adoptionId)
-                .orElseThrow(() -> new AdoptionNotFoundException("Adoption not found"));
+                .orElseThrow(() -> new PetwardsAdoptionNotFoundException("Adoption not found"));
 
         adoption.setStatus(AdoptionStatus.REJECTED); // Mettre à jour le statut de l'adoption
         adoptionRepository.save(adoption);

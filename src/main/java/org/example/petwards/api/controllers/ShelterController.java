@@ -3,7 +3,7 @@ package org.example.petwards.api.controllers;
 import lombok.RequiredArgsConstructor;
 import org.example.petwards.api.models.shelters.dtos.ShelterDTO;
 import org.example.petwards.bll.ShelterService;
-import org.example.petwards.bll.exceptions.ShelterNotFoundException;
+import org.example.petwards.bll.exceptions.PetwardsShelterNotFoundException;
 import org.example.petwards.dl.entities.Shelter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +35,7 @@ public class ShelterController {
         try {
             Shelter shelter = shelterService.findById(id);
             return new ResponseEntity<>(ShelterDTO.fromShelter(shelter), HttpStatus.OK);
-        } catch (ShelterNotFoundException e) {
+        } catch (PetwardsShelterNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -52,7 +52,7 @@ public class ShelterController {
             Shelter shelter = new Shelter(shelterDTO.name(), shelterDTO.description());
             shelterService.update(id, shelter);
             return new ResponseEntity<>(ShelterDTO.fromShelter(shelter), HttpStatus.OK);
-        } catch (ShelterNotFoundException e) {
+        } catch (PetwardsShelterNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

@@ -5,13 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.example.petwards.api.models.CustomPage;
 import org.example.petwards.api.models.beasts.dtos.BeastDTO;
 import org.example.petwards.api.models.beasts.forms.BeastForm;
-import org.example.petwards.api.models.capabilities.dtos.CapabilityDTO;
 import org.example.petwards.bll.BeastService;
-import org.example.petwards.bll.exceptions.BeastNotFoundException;
-import org.example.petwards.bll.exceptions.ShelterNotFoundException;
-import org.example.petwards.dal.repositories.BeastRepository;
+import org.example.petwards.bll.exceptions.PetwardsBeastNotFoundException;
 import org.example.petwards.dl.entities.Beast;
-import org.example.petwards.dl.entities.Capability;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -21,7 +17,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -56,7 +51,7 @@ public class BeastController {
         try {
             Beast beast = beastService.findById(id);
             return new ResponseEntity<>(BeastDTO.fromBeast(beast), HttpStatus.OK);
-        } catch ( BeastNotFoundException e) {
+        } catch ( PetwardsBeastNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

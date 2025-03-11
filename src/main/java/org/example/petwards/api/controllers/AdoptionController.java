@@ -2,16 +2,10 @@ package org.example.petwards.api.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.example.petwards.api.models.CustomPage;
-import org.example.petwards.api.models.adopters.dtos.AdopterDTO;
 import org.example.petwards.api.models.adoptions.dtos.AdoptionDTO;
 import org.example.petwards.bll.AdoptionService;
-import org.example.petwards.bll.exceptions.AdoptionNotFoundException;
+import org.example.petwards.bll.exceptions.PetwardsAdoptionNotFoundException;
 import org.example.petwards.dl.entities.Adoption;
-import org.example.petwards.dl.entities.Wizard;
-import org.example.petwards.dl.enums.AdoptionStatus;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -66,7 +60,7 @@ public class AdoptionController {
 
             // Retourner la réponse avec l'adoption mise à jour
             return new ResponseEntity<>(AdoptionDTO.fromAdoption(adoption), HttpStatus.OK);
-        } catch (AdoptionNotFoundException e) {
+        } catch (PetwardsAdoptionNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -82,7 +76,7 @@ public class AdoptionController {
 
             // Retourner la réponse avec l'adoption mise à jour
             return new ResponseEntity<>(AdoptionDTO.fromAdoption(adoption), HttpStatus.OK);
-        } catch (AdoptionNotFoundException e) {
+        } catch (PetwardsAdoptionNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
