@@ -11,9 +11,11 @@ import java.util.Optional;
 
 @Repository
 public interface WizardRepository extends JpaRepository<Wizard, Long> {
-    Page<Wizard> findAllByShelterRole(ShelterRole shelterRole, Pageable pageable);
-
     Optional<Wizard> findByEmail(String email);
 
     boolean existsByEmail(String email);
+
+    Page<Wizard> findAllByShelterRole(ShelterRole shelterRole, Pageable pageable);
+
+    Optional<Wizard> findByShelterRoleAndId(ShelterRole shelterRole, Long id);
 }

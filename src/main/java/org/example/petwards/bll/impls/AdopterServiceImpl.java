@@ -9,13 +9,23 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class AdopterServiceImpl implements AdopterService {
 
     private final WizardRepository wizardRepository;
+
+    @Override
+    public Page<Wizard> getAllAdopters(Pageable pageable) {
+        return wizardRepository.findAllByShelterRole(ShelterRole.ADOPTER, pageable);
+    }
+
+    @Override
+    public Wizard findById(Long id) {
+        return wizardRepository.findByShelterRoleAndId(ShelterRole.ADOPTER, id).orElseThrow(
+                () -> new RuntimeException("id not found")
+        );
+    }
 
     @Override
     public Wizard save(Wizard wizardAdopter) {
@@ -24,18 +34,6 @@ public class AdopterServiceImpl implements AdopterService {
         }
         wizardRepository.save(wizardAdopter);
         return wizardAdopter;
-    }
-
-    @Override
-    public Wizard findById(Long id) {
-        return wizardRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("id not found")
-        );
-    }
-
-    @Override
-    public List<Wizard> findAll() {
-        return wizardRepository.findAll();
     }
 
     @Override
@@ -59,19 +57,5 @@ public class AdopterServiceImpl implements AdopterService {
             throw new RuntimeException("id not found");
         }
         wizardRepository.deleteById(id);
-
-    }
-
-    @Override
-    public void deleteAdopter(Long id) {
-        if (!wizardRepository.existsById(id)) {
-            throw new RuntimeException("id not found");
-        }
-        wizardRepository.deleteById(id);
-    }
-
-    @Override
-    public Page<Wizard> getAllAdopters(Pageable pageable) {
-        return wizardRepository.findAllByShelterRole(ShelterRole.ADOPTER, pageable);
     }
 }

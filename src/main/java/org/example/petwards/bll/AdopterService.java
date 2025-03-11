@@ -14,11 +14,7 @@ public interface AdopterService {
 
     Wizard findById(Long id);
 
-    List<Wizard> findAll();
-
     void updateAdopter(Long id, Wizard wizardAdopter);
 
     void deleteById(Long id);
-
-    void deleteAdopter(Long id);
 }
