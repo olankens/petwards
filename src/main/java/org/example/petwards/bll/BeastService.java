@@ -13,6 +13,7 @@ import java.util.Set;
 
 public interface BeastService {
     Beast save (Beast beast);
+    Beast createBeast (Beast beast);
     Beast findById(Long id);
     Page<Beast> findAll(Pageable pageable);
     Page<Beast> findAllByNameAndCapability(Pageable pageable, String name, List<String> capabilities);

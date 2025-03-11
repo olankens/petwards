@@ -1,9 +1,12 @@
 package org.example.petwards.api.controllers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.petwards.api.models.CustomPage;
 import org.example.petwards.api.models.beasts.dtos.BeastDTO;
+import org.example.petwards.api.models.beasts.forms.BeastForm;
 import org.example.petwards.api.models.capabilities.dtos.CapabilityDTO;
+import org.example.petwards.api.models.capabilities.forms.CapabilityForm;
 import org.example.petwards.bll.BeastService;
 import org.example.petwards.bll.exceptions.ShelterNotFoundException;
 import org.example.petwards.dal.repositories.BeastRepository;
@@ -79,23 +82,36 @@ public class BeastController {
     @PreAuthorize("hasAnyAuthority('ADMIN', 'STAFF')")
     @PostMapping
     public ResponseEntity<BeastDTO> createBeast(
-            @RequestBody BeastDTO beastDTO
+            @Valid @RequestBody BeastForm form
     ) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Beast beast = form.toBeast();
+        beastService.createBeast(beast);
+        return ResponseEntity.noContent().build();
     }
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'STAFF')")
     @PutMapping("/{id}")
     public ResponseEntity<BeastDTO> updateBeast(
             @PathVariable Long id,
-            @RequestBody BeastDTO beastDTO
+            @Valid @RequestBody BeastForm form
     ) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        try {
+            Beast beast = form.toBeast();
+            beastService.update(id, beast);
+            return ResponseEntity.noContent().build();
+        } catch (ShelterNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'STAFF')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBeast(@PathVariable Long id) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        try {
+            beastService.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } catch (ShelterNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

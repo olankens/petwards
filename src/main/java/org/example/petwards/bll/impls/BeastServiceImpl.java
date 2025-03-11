@@ -8,6 +8,7 @@ import org.example.petwards.dal.repositories.BeastRepository;
 import org.example.petwards.dal.repositories.CapabilityRepository;
 import org.example.petwards.dl.entities.Beast;
 import org.example.petwards.dl.entities.Capability;
+import org.example.petwards.dl.enums.ShelterRole;
 import org.example.petwards.il.filters.specifications.BeastSpecification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,6 +31,12 @@ public class BeastServiceImpl implements BeastService {
         if (beastRepository.existsById(beast.getId())){
             throw  new RuntimeException("id already exists");
         }
+        beastRepository.save(beast);
+        return beast;
+    }
+
+    @Override
+    public Beast createBeast(Beast beast) {
         beastRepository.save(beast);
         return beast;
     }
