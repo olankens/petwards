@@ -88,4 +88,14 @@ public class AdopterController {
         adopterService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PreAuthorize("hasAnyAuthority('ADOPTER')")
+    @PostMapping("/{id}")
+    public ResponseEntity<Void> adoptBeast(
+            @PathVariable Long id,
+            @AuthenticationPrincipal Wizard current
+    ) {
+        adopterService.adoptBeast(id, current);
+        return ResponseEntity.noContent().build();
+    }
 }
