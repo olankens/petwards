@@ -7,6 +7,7 @@ import org.example.petwards.dl.entities.Wizard;
 import org.example.petwards.dl.enums.ShelterRole;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class AdopterServiceImpl implements AdopterService {
 
     private final WizardRepository wizardRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public Page<Wizard> getAllAdopters(Pageable pageable) {
@@ -38,17 +40,15 @@ public class AdopterServiceImpl implements AdopterService {
 
     @Override
     public void updateAdopter(Long id, Wizard wizardAdopter) {
-        Wizard existingWizardAdopter = wizardRepository.findById(id).orElseThrow(
+        Wizard found = wizardRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("id not found")
         );
-        existingWizardAdopter.setFirstName(wizardAdopter.getFirstName());
-        existingWizardAdopter.setLastName(wizardAdopter.getLastName());
-        existingWizardAdopter.setEmail(wizardAdopter.getEmail());
-        existingWizardAdopter.setPassword(wizardAdopter.getPassword());
-        existingWizardAdopter.setShelterRole(wizardAdopter.getShelterRole());
-        existingWizardAdopter.setWizardHouse(wizardAdopter.getWizardHouse());
-        existingWizardAdopter.setAdoptions(wizardAdopter.getAdoptions());
-        wizardRepository.save(existingWizardAdopter);
+        found.setFirstName(wizardAdopter.getFirstName());
+        found.setLastName(wizardAdopter.getLastName());
+        found.setEmail(wizardAdopter.getEmail());
+        found.setPassword(passwordEncoder.encode(wizardAdopter.getPassword()));
+        found.setWizardHouse(wizardAdopter.getWizardHouse());
+        wizardRepository.save(found);
     }
 
     @Override
