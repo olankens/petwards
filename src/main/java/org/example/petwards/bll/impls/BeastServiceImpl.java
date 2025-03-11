@@ -8,9 +8,14 @@ import org.example.petwards.dal.repositories.BeastRepository;
 import org.example.petwards.dal.repositories.CapabilityRepository;
 import org.example.petwards.dl.entities.Beast;
 import org.example.petwards.dl.entities.Capability;
+import org.example.petwards.il.filters.specifications.BeastSpecification;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -37,8 +42,16 @@ public class BeastServiceImpl implements BeastService {
     }
 
     @Override
-    public List<Beast> findAll() {
-        return beastRepository.findAll();
+    public Page<Beast> findAllByNameAndCapability(Pageable pageable, String name, List<String> capabilities) {
+        Specification<Beast> spec = Specification.where(BeastSpecification.hasNameLike(name))
+                .and(BeastSpecification.joinCapabilities())
+                .and(BeastSpecification.hasCapabilities(capabilities));
+        return beastRepository.findAll(spec, pageable);
+    }
+
+    @Override
+    public Page<Beast> findAll(Pageable pageable) {
+        return beastRepository.findAll(pageable);
     }
 
     @Override
