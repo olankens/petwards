@@ -37,6 +37,11 @@ public class AdoptionServiceImpl implements AdoptionService {
     }
 
     @Override
+    public List<Adoption> findAllByPending() {
+        return adoptionRepository.findByStatus(AdoptionStatus.PENDING);
+    }
+
+    @Override
     public List<Adoption> findAll() {
         return adoptionRepository.findAll();
     }
