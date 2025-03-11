@@ -3,18 +3,18 @@ package org.example.petwards.bll.impls;
 import lombok.RequiredArgsConstructor;
 import org.example.petwards.bll.AdopterService;
 import org.example.petwards.dal.repositories.WizardRepository;
-import org.example.petwards.dl.entities.Adoption;
 import org.example.petwards.dl.entities.Wizard;
-import org.example.petwards.dl.enums.AdoptionStatus;
+import org.example.petwards.dl.enums.ShelterRole;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class AdopterServiceImpl implements AdopterService {
+
     private final WizardRepository wizardRepository;
 
     @Override
@@ -71,7 +71,7 @@ public class AdopterServiceImpl implements AdopterService {
     }
 
     @Override
-    public List<Wizard> getAllAdopters() {
-        return wizardRepository.findAll();
+    public Page<Wizard> getAllAdopters(Pageable pageable) {
+        return wizardRepository.findAllByShelterRole(ShelterRole.ADOPTER, pageable);
     }
 }

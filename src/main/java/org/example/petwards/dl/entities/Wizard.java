@@ -15,8 +15,8 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = false)
-@ToString
+@EqualsAndHashCode(of = {"email"})
+@ToString(of = {"email", "shelterRole"})
 @Getter
 public class Wizard implements UserDetails {
 
@@ -67,6 +67,25 @@ public class Wizard implements UserDetails {
         this.shelterRole = shelterRole;
     }
 
+    // TODO: To delete?
+    public Wizard(String firstName, String lastName, String email, ShelterRole shelterRole, WizardHouse wizardHouse) {
+        this();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.shelterRole = shelterRole;
+        this.wizardHouse = wizardHouse;
+    }
+
+    // TODO: To delete?
+    public Wizard(String firstName, String lastName, String email, WizardHouse wizardHouse, String password) {
+        this();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.wizardHouse = wizardHouse;
+        this.password = password;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -78,23 +97,23 @@ public class Wizard implements UserDetails {
         return this.email;
     }
 
-    public Wizard(String firstName, String lastName, String email, ShelterRole shelterRole, WizardHouse wizardHouse) {
-        this();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.shelterRole = shelterRole;
-        this.wizardHouse = wizardHouse;
-
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    public Wizard(String firstName, String lastName, String email, WizardHouse wizardHouse, String password) {
-        this();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.wizardHouse = wizardHouse;
-        this.password = password;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
 
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

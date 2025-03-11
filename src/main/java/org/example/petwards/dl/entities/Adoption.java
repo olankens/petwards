@@ -29,9 +29,4 @@ public class Adoption {
     @JoinColumn(name = "wizard_id")
     @Setter
     private Wizard wizard;
-
-    public Adoption(AdoptionStatus adoptionStatus) {
-        this();
-        this.status = status;
-    }
 }

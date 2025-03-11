@@ -5,6 +5,7 @@ import lombok.*;
 import org.example.petwards.dl.enums.DangerLevel;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -29,10 +30,9 @@ public class Beast {
     @Setter
     private DangerLevel dangerLevel;
 
-    @ManyToOne
-    @JoinColumn(name = "adoption")
+    @OneToMany(mappedBy = "beast", cascade = CascadeType.ALL)
     @Setter
-    private Adoption adoption;
+    private List<Adoption> adoptions;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -42,12 +42,12 @@ public class Beast {
     )
     private Set<Capability> capabilities = new HashSet<>();
 
-    public Beast(String name, boolean isAvailable, DangerLevel dangerLevel, Adoption adoption, Set<Capability> capability) {
+    public Beast(String name, boolean isAvailable, DangerLevel dangerLevel, List<Adoption> adoptions, Set<Capability> capability) {
         this();
         this.name = name;
         this.isAvailable = isAvailable;
         this.dangerLevel = dangerLevel;
-        this.adoption = adoption;
+        this.adoptions = adoptions;
         this.capabilities = capability;
     }
 }

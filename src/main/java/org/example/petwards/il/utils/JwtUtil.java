@@ -15,7 +15,6 @@ import java.util.Date;
 public class JwtUtil {
 
     private final byte[] secret = "yabadabadoooooooooooooooooooooooooooooo".getBytes();
-    private final int expireAt = 24 * 60 * 60;
     private final JwtBuilder builder;
     private final JwtParser parser;
 
@@ -29,6 +28,7 @@ public class JwtUtil {
     }
 
     public String generateToken(Wizard wizard) {
+        int expireAt = 24 * 60 * 60;
         return this.builder
                 .setSubject(wizard.getUsername())
                 .claim("id", wizard.getId())

@@ -1,15 +1,27 @@
 package org.example.petwards.api.models.adopters.dtos;
 
+import org.example.petwards.dl.entities.Adoption;
 import org.example.petwards.dl.entities.Wizard;
-import org.example.petwards.dl.enums.ShelterRole;
+import org.example.petwards.dl.enums.WizardHouse;
+
+import java.util.List;
 
 public record AdopterDTO(
         Long id,
-        String fullName,
-        ShelterRole shelterRole
+        String firstName,
+        String lastName,
+        String email,
+        WizardHouse wizardHouse,
+        List<Adoption> adoptions
 ) {
-    public static AdopterDTO fromWizardStaff(Wizard wizard) {
-        String fullName = wizard.getLastName() + " " + wizard.getFirstName();
-        return new AdopterDTO(wizard.getId(), fullName, wizard.getShelterRole());
+    public static AdopterDTO fromAdopter(Wizard wizard) {
+        return new AdopterDTO(
+                wizard.getId(),
+                wizard.getFirstName(),
+                wizard.getLastName(),
+                wizard.getEmail(),
+                wizard.getWizardHouse(),
+                wizard.getAdoptions()
+        );
     }
 }

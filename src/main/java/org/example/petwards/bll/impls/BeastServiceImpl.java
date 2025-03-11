@@ -49,7 +49,7 @@ public class BeastServiceImpl implements BeastService {
         existingBeast.setName(beast.getName());
         existingBeast.setAvailable(beast.isAvailable());
         existingBeast.setDangerLevel(beast.getDangerLevel());
-        existingBeast.setAdoption(beast.getAdoption());
+        existingBeast.setAdoptions(beast.getAdoptions());
         beastRepository.save(existingBeast);
 
     }
