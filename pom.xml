@@ -8,11 +8,11 @@
         <version>3.4.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>be.bstorm</groupId>
-    <artifactId>DemoSpringAPI</artifactId>
+    <groupId>org.example</groupId>
+    <artifactId>petwards</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>DemoSpringAPI</name>
-    <description>DemoSpringAPI</description>
+    <name>petwards</name>
+    <description>petwards</description>
     <url/>
     <licenses>
         <license/>

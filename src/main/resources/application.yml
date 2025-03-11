@@ -27,14 +27,3 @@ spring:
 
 server:
   port: 8080
-
-#  spring.mail.host=smtp.gmail.com
-#  spring.mail.port=587
-#  spring.mail.username=adoptionpetwards@gmail.com
-#  spring.mail.password=Test1234=
-#  spring.mail.properties.mail.smtp.auth=true
-#  spring.mail.properties.mail.smtp.starttls.enable=true
-
-#Note : Si tu utilises un autre service SMTP,
-#  tu devras adapter l'URL du serveur et d'autres paramètres
-#  (par exemple, pour SendGrid ou Mailgun).
