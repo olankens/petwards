@@ -1,4 +1,4 @@
-package org.example.petwards.api.models.shelters.from;
+package org.example.petwards.api.models.shelters.forms;
 
 
 import org.example.petwards.dl.entities.Shelter;

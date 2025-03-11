@@ -4,14 +4,13 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.petwards.api.models.CustomPage;
 import org.example.petwards.api.models.staffs.dtos.StaffDTO;
-import org.example.petwards.api.models.staffs.from.StaffForm;
+import org.example.petwards.api.models.staffs.forms.StaffForm;
 import org.example.petwards.bll.StaffService;
 import org.example.petwards.bll.exceptions.StaffNotFoundException;
 import org.example.petwards.dl.entities.Wizard;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.AuthenticatedPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

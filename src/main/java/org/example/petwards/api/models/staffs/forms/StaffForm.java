@@ -1,8 +1,6 @@
-package org.example.petwards.api.models.staffs.from;
+package org.example.petwards.api.models.staffs.forms;
 
-import org.example.petwards.dl.entities.Shelter;
 import org.example.petwards.dl.entities.Wizard;
-import org.example.petwards.dl.enums.ShelterRole;
 import org.example.petwards.dl.enums.WizardHouse;
 
 public record StaffForm(
