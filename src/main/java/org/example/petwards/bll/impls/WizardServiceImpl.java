@@ -19,7 +19,7 @@ public class WizardServiceImpl implements WizardService {
 
     @Override
     public Wizard save(Wizard wizard) {
-        if (wizardRepository.existsById(wizard.getId())){
+        if (wizardRepository.existsById(wizard.getId())) {
             throw new RuntimeException("id already exists");
         }
         wizardRepository.save(wizard);
@@ -29,7 +29,7 @@ public class WizardServiceImpl implements WizardService {
     @Override
     public Wizard findById(Long id) {
         return wizardRepository.findById(id).orElseThrow(
-            () -> new RuntimeException("id not found")
+                () -> new RuntimeException("id not found")
         );
     }
 
@@ -55,11 +55,15 @@ public class WizardServiceImpl implements WizardService {
 
     @Override
     public void deleteById(Long id) {
-        if (!wizardRepository.existsById(id)){
+        if (!wizardRepository.existsById(id)) {
             throw new RuntimeException("id not found");
         }
         wizardRepository.deleteById(id);
+    }
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return wizardRepository.findByEmail(username).orElseThrow();
     }
 
     @Override

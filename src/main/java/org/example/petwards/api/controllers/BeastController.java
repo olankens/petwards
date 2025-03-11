@@ -76,7 +76,7 @@ public class BeastController {
         }
     }
 
-    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('STAFF')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'STAFF')")
     @PostMapping
     public ResponseEntity<BeastDTO> createBeast(
             @RequestBody BeastDTO beastDTO
@@ -84,7 +84,7 @@ public class BeastController {
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
-    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('STAFF')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'STAFF')")
     @PutMapping("/{id}")
     public ResponseEntity<BeastDTO> updateBeast(
             @PathVariable Long id,
@@ -93,7 +93,7 @@ public class BeastController {
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
-    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('STAFF')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'STAFF')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBeast(@PathVariable Long id) {
         throw new UnsupportedOperationException("Not implemented yet");

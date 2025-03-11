@@ -9,15 +9,12 @@ import org.example.petwards.api.models.shelters.dtos.ShelterDTO;
 import org.example.petwards.bll.CapabilityService;
 import org.example.petwards.bll.exceptions.ShelterNotFoundException;
 import org.example.petwards.dl.entities.Capability;
-import org.example.petwards.dl.entities.Shelter;
-import org.example.petwards.dl.entities.Wizard;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponents;
@@ -41,8 +38,7 @@ public class CapabilityController {
                 .map(CapabilityDTO::fromCapability)
                 .toList();
         CustomPage<CapabilityDTO> result = new CustomPage<>(capabilitiesDTOs, capabilities.getTotalPages(), capabilities.getNumber() + 1);
-        ResponseEntity<CustomPage<CapabilityDTO>> responseResult = ResponseEntity.ok(result);
-        return responseResult;
+        return ResponseEntity.ok(result);
     }
 
     @GetMapping("/{id}")
@@ -65,6 +61,4 @@ public class CapabilityController {
         UriComponents uriComponents = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id);
         return ResponseEntity.created(uriComponents.toUri()).build();
     }
-
-
 }
