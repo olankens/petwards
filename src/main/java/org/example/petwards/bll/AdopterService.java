@@ -1,12 +1,8 @@
 package org.example.petwards.bll;
 
-import org.example.petwards.dl.entities.Beast;
 import org.example.petwards.dl.entities.Wizard;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import java.util.List;
-
 
 public interface AdopterService {
     Page<Wizard> getAllAdopters(Pageable pageable);

@@ -3,9 +3,10 @@ package org.example.petwards.api.models.adoptions.forms;
 import org.example.petwards.dl.entities.Adoption;
 import org.example.petwards.dl.entities.Beast;
 import org.example.petwards.dl.entities.Wizard;
+import org.example.petwards.dl.enums.AdoptionStatus;
 
 public record AdoptionForm(
-        String adoptionStatus,
+        AdoptionStatus adoptionStatus,
         Beast beast,
         Wizard wizard
 ) {

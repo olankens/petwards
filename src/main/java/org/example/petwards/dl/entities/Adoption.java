@@ -35,9 +35,9 @@ public class Adoption {
         this.status = status;
     }
 
-    public Adoption(String adoptionStatus, Beast beast, Wizard wizard) {
+    public Adoption(AdoptionStatus adoptionStatus, Beast beast, Wizard wizard) {
         this();
-        this.status = AdoptionStatus.PENDING;
+        this.status = adoptionStatus;
         this.beast = beast;
         this.wizard = wizard;
     }

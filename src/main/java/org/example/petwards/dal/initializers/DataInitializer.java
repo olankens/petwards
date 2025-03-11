@@ -2,11 +2,12 @@ package org.example.petwards.dal.initializers;
 
 
 import lombok.RequiredArgsConstructor;
-import org.example.petwards.dal.repositories.*;
-import org.example.petwards.dl.entities.Beast;
-import org.example.petwards.dl.entities.Capability;
-import org.example.petwards.dl.entities.Shelter;
-import org.example.petwards.dl.entities.Wizard;
+import org.example.petwards.dal.repositories.BeastRepository;
+import org.example.petwards.dal.repositories.CapabilityRepository;
+import org.example.petwards.dal.repositories.ShelterRepository;
+import org.example.petwards.dal.repositories.WizardRepository;
+import org.example.petwards.dl.entities.*;
+import org.example.petwards.dl.enums.AdoptionStatus;
 import org.example.petwards.dl.enums.DangerLevel;
 import org.example.petwards.dl.enums.ShelterRole;
 import org.example.petwards.dl.enums.WizardHouse;
@@ -26,7 +27,6 @@ public class DataInitializer implements CommandLineRunner {
     private final WizardRepository wizardRepository;
     private final BeastRepository beastRepository;
     private final CapabilityRepository capabilityRepository;
-    private final AdoptionRepository adoptionRepository;
     private final ShelterRepository shelterRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -35,6 +35,7 @@ public class DataInitializer implements CommandLineRunner {
         saveDefaultWizards();
         saveDefaultBeasts();
         saveDefaultShelters();
+        saveDefaultAdoptions();
     }
 
     public void saveDefaultWizards() {
@@ -203,5 +204,12 @@ public class DataInitializer implements CommandLineRunner {
     public void saveDefaultShelters() {
         Shelter shelter = new Shelter("petward", "");
         shelterRepository.save(shelter);
+    }
+
+    private void saveDefaultAdoptions() {
+        Beast beast = beastRepository.findById(4L).orElseThrow();
+        Wizard wizard = wizardRepository.findByEmail("harry@gmail.com").orElseThrow();
+        wizard.getAdoptions().add(new Adoption(AdoptionStatus.PENDING, beast, wizard));
+        wizardRepository.save(wizard);
     }
 }
