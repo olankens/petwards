@@ -34,7 +34,7 @@ public class Beast {
     @Setter
     private List<Adoption> adoptions;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "beast_capabilities",
             joinColumns = @JoinColumn(name = "beast_id"),

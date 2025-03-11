@@ -1,6 +1,5 @@
 package org.example.petwards.bll.impls;
 
-
 import lombok.RequiredArgsConstructor;
 import org.example.petwards.bll.CapabilityService;
 import org.example.petwards.dal.repositories.CapabilityRepository;

@@ -72,7 +72,6 @@ public class AdopterServiceImpl implements AdopterService {
         adoption.setBeast(beast);
         adoption.setWizard(adopter);
         adopter.getAdoptions().add(adoption);
-        adoptionRepository.save(adoption);
         wizardRepository.save(adopter);
     }
 }

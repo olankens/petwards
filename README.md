@@ -9,9 +9,10 @@ Petwards is a powerful and magical API designed to manage the Petwards Shelter, 
 - Anonymous can list and filter beasts
 - Filter beasts by name and capabilities
 - Three roles: adopter, staff and admin
-- Only adopter can adopt beasts
-- Only staff can approve or reject adoption
-- Only admin can update shelter infos
+- Only adopters can adopt beasts
+- Only staffs can approve or reject adoption
+- Only staffs and admins can add beasts
+- Only admins can update shelter infos
 
 # <samp>GUIDANCE</samp>
 

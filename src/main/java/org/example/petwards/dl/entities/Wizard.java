@@ -46,7 +46,7 @@ public class Wizard implements UserDetails {
     @Setter
     private WizardHouse wizardHouse;
 
-    @OneToMany(mappedBy = "wizard", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "wizard", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Setter
     private List<Adoption> adoptions = new ArrayList<>();
 

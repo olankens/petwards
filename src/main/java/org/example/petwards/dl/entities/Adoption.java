@@ -20,12 +20,12 @@ public class Adoption {
     @Setter
     private AdoptionStatus status = AdoptionStatus.PENDING;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "beast_id")
     @Setter
     private Beast beast;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "wizard_id")
     @Setter
     private Wizard wizard;
