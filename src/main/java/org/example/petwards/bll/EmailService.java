@@ -1,10 +1,5 @@
 package org.example.petwards.bll;
 
-//import org.springframework.mail.MailException;
-//import org.springframework.mail.javamail.JavaMailSender;
-//import org.springframework.mail.javamail.MimeMessageHelper;
-//import org.springframework.stereotype.Service;
-
 import jakarta.mail.MessagingException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;

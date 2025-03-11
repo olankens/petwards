@@ -1,2 +1,0 @@
-// Ce qui est ici ne sert à rien, à part conserver le dossier "ressources" le temps du développement.
-// A supprimer une fois le projet fini.

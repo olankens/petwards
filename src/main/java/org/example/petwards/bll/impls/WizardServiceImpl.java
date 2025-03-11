@@ -65,11 +65,4 @@ public class WizardServiceImpl implements WizardService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return wizardRepository.findByEmail(username).orElseThrow();
     }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return wizardRepository.findByEmail(username).orElseThrow(
-                () -> new UsernameNotFoundException(username)
-        );
-    }
 }

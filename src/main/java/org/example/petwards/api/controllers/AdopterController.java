@@ -32,8 +32,10 @@ public class AdopterController {
             @RequestParam(required = false, defaultValue = "1") int page,
             @RequestParam(required = false, defaultValue = "10") int size
     ) {
+        Page<Wizard> adopters = adopterService.getAllAdopters(
                 PageRequest.of(page - 1, size, Sort.by(Sort.Direction.ASC, "id"))
         );
+        List<AdopterDTO> dtos = adopters.getContent().stream()
                 .map(AdopterDTO::fromAdopter)
                 .toList();
         CustomPage<AdopterDTO> results = new CustomPage<>(dtos, adopters.getTotalPages(), adopters.getNumber() + 1);
@@ -60,8 +62,8 @@ public class AdopterController {
     @PutMapping("/{id}")
     public ResponseEntity<AdopterDTO> updateAdopter(
             @PathVariable Long id,
-            @AuthenticationPrincipal Wizard current
             @Valid @RequestBody AdopterForm form,
+            @AuthenticationPrincipal Wizard current
     ) {
         if (current != null && current.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ADOPTER"))) {
             if (!current.getId().equals(id)) {
