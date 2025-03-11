@@ -68,12 +68,11 @@ public class AdoptionController {
     @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('STAFF')")
     @PutMapping("/approve/{id}")
     public ResponseEntity<AdoptionDTO> approveAdoption(
-            @PathVariable Long id,
-            @RequestParam String adoptionEmail
+            @PathVariable Long id
     ) {
         try {
             // Appeler le service pour approuver l'adoption et envoyer l'email
-            Adoption adoption = adoptionService.approveAdoption(id, adoptionEmail);
+            Adoption adoption = adoptionService.approveAdoption(id);
 
             // Retourner la réponse avec l'adoption mise à jour
             return new ResponseEntity<>(AdoptionDTO.fromAdoption(adoption), HttpStatus.OK);
@@ -99,12 +98,11 @@ public class AdoptionController {
 @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('STAFF')")
     @PutMapping("/reject/{id}")
     public ResponseEntity<AdoptionDTO> rejectAdoption(
-            @PathVariable Long id,
-            @RequestParam String adoptionEmail
+            @PathVariable Long id
     ) {
         try {
             // Appeler le service pour rejeter l'adoption et envoyer l'email
-            Adoption adoption = adoptionService.rejectAdoption(id, adoptionEmail);
+            Adoption adoption = adoptionService.rejectAdoption(id);
 
             // Retourner la réponse avec l'adoption mise à jour
             return new ResponseEntity<>(AdoptionDTO.fromAdoption(adoption), HttpStatus.OK);

@@ -10,7 +10,6 @@ public record AdopterDTO(
         Long id,
         String firstName,
         String lastName,
-        String email,
         WizardHouse wizardHouse,
         List<Adoption> adoptions
 ) {
@@ -19,7 +18,6 @@ public record AdopterDTO(
                 wizard.getId(),
                 wizard.getFirstName(),
                 wizard.getLastName(),
-                wizard.getEmail(),
                 wizard.getWizardHouse(),
                 wizard.getAdoptions()
         );

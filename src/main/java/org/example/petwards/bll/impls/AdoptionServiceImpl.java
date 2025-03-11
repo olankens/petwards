@@ -90,7 +90,7 @@ public class AdoptionServiceImpl implements AdoptionService {
 //        return adoption;
 //    }
 
-    public Adoption approveAdoption(Long adoptionId, String adopterEmail) {
+    public Adoption approveAdoption(Long adoptionId) {
         Adoption adoption = adoptionRepository.findById(adoptionId)
                 .orElseThrow(() -> new AdoptionNotFoundException("Adoption not found"));
 
@@ -101,7 +101,7 @@ public class AdoptionServiceImpl implements AdoptionService {
         String subject = "Adoption Acceptée";
         String text = "Félicitations! Votre adoption a été acceptée.";
         try {
-            emailService.sendEmail(adopterEmail, subject, text);  // Envoie l'email à l'adoptant
+            emailService.sendEmail(adoption.getWizard().getEmail(), subject, text);  // Envoie l'email à l'adoptant
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
@@ -125,7 +125,7 @@ public class AdoptionServiceImpl implements AdoptionService {
 //        return adoption;
 //    }
 
-    public Adoption rejectAdoption(Long adoptionId, String adopterEmail) {
+    public Adoption rejectAdoption(Long adoptionId) {
         Adoption adoption = adoptionRepository.findById(adoptionId)
                 .orElseThrow(() -> new AdoptionNotFoundException("Adoption not found"));
 
@@ -136,7 +136,7 @@ public class AdoptionServiceImpl implements AdoptionService {
         String subject = "Adoption Refusée";
         String text = "Désolé, votre adoption a été refusée. Nous vous remercions de votre intérêt.";
         try {
-            emailService.sendEmail(adopterEmail, subject, text);  // Envoie l'email à l'adoptant
+            emailService.sendEmail(adoption.getWizard().getEmail(), subject, text);  // Envoie l'email à l'adoptant
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
