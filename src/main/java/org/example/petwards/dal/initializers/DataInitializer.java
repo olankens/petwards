@@ -3,10 +3,8 @@ package org.example.petwards.dal.initializers;
 
 import lombok.RequiredArgsConstructor;
 import org.example.petwards.dal.repositories.*;
-import org.example.petwards.dl.entities.Beast;
-import org.example.petwards.dl.entities.Capability;
-import org.example.petwards.dl.entities.Shelter;
-import org.example.petwards.dl.entities.Wizard;
+import org.example.petwards.dl.entities.*;
+import org.example.petwards.dl.enums.AdoptionStatus;
 import org.example.petwards.dl.enums.DangerLevel;
 import org.example.petwards.dl.enums.ShelterRole;
 import org.example.petwards.dl.enums.WizardHouse;
@@ -15,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -26,7 +25,6 @@ public class DataInitializer implements CommandLineRunner {
     private final WizardRepository wizardRepository;
     private final BeastRepository beastRepository;
     private final CapabilityRepository capabilityRepository;
-    private final AdoptionRepository adoptionRepository;
     private final ShelterRepository shelterRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -35,6 +33,7 @@ public class DataInitializer implements CommandLineRunner {
         saveDefaultWizards();
         saveDefaultBeasts();
         saveDefaultShelters();
+        saveDefaultAdoptions();
     }
 
     public void saveDefaultWizards() {
@@ -203,5 +202,31 @@ public class DataInitializer implements CommandLineRunner {
     public void saveDefaultShelters() {
         Shelter shelter = new Shelter("petward", "");
         shelterRepository.save(shelter);
+
+
+    }
+
+    public void saveDefaultAdoptions() {
+//        Set<Capability> forTry = Set.of(new Capability("try"), new Capability("same"));
+//        String defaultPasswordForAdopters = "adopter";
+//        Wizard tryWizard = new Wizard(
+//                "try",
+//                "same",
+//                "try@gmail.com",
+//                passwordEncoder.encode(defaultPasswordForAdopters),
+//                WizardHouse.HUFFLEPUFF,
+//                ShelterRole.ADOPTER
+//        );
+//        Beast tryBeast = new Beast(
+//                "Majestic Try",
+//                true,
+//                DangerLevel.LOW,
+//                null,
+//                forTry
+//        );
+        Beast fret = beastRepository.findById(4L).orElseThrow();
+        Wizard wiz = wizardRepository.findById(3L).orElseThrow();
+        wiz.getAdoptions().add(new Adoption(AdoptionStatus.PENDING,fret,wiz ));
+        wizardRepository.save(wiz);
     }
 }

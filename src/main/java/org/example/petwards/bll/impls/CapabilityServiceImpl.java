@@ -18,6 +18,13 @@ public class CapabilityServiceImpl implements CapabilityService {
     private final CapabilityRepository capabilityRepository;
 
     @Override
+    public Capability createCapability(Capability capability) {
+        capability.setName(capability.getName());
+        capabilityRepository.save(capability);
+        return capability;
+    }
+
+    @Override
     public Capability save(Capability capability) {
         if (capabilityRepository.existsById(capability.getId())){
             throw new RuntimeException("id already exists");

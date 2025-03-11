@@ -51,14 +51,19 @@ public class CapabilityController {
         }
     }
 
-    @PreAuthorize("isAuthenticated()")
+
     @PostMapping
-    public ResponseEntity<Void> createCapability(
-            @Valid @RequestBody CapabilityForm form
+    public ResponseEntity<CapabilityDTO> createCapability(
+            @Valid @RequestBody CapabilityForm capabilityform
     ) {
-        Capability capability = form.toCapability();
-        Long id = capabilityService.save(capability).getId();
-        UriComponents uriComponents = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id);
-        return ResponseEntity.created(uriComponents.toUri()).build();
+        Capability capability = capabilityform.toCapability();
+        capabilityService.createCapability(capability);
+        return ResponseEntity.noContent().build();
+
+//        Long id = capabilityService.save(capability).getId();
+//        UriComponents uriComponents = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id);
+//        return ResponseEntity.created(uriComponents.toUri()).build();
     }
+
+
 }
