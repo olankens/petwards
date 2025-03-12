@@ -20,7 +20,7 @@ public class ShelterController {
 
     private final ShelterService shelterService;
 
-    @Operation(summary = "Returns all Shelters")
+    @Operation(summary = "Returns all shelters")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'STAFF')")
     @GetMapping
     public ResponseEntity<List<ShelterDTO>> getAllShelters() {
@@ -31,7 +31,7 @@ public class ShelterController {
         return new ResponseEntity<>(shelterDTOs, HttpStatus.OK);
     }
 
-    @Operation(summary = "Returns Shelter by Id")
+    @Operation(summary = "Returns a shelter with specified id")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'STAFF')")
     @GetMapping("/{id}")
     public ResponseEntity<ShelterDTO> getShelterById(@PathVariable Long id) {
@@ -43,7 +43,7 @@ public class ShelterController {
         }
     }
 
-    @Operation(summary = "Update shelter details by shelter ID")
+    @Operation(summary = "Updates a shelter details  with specified id")
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<ShelterDTO> updateShelter(

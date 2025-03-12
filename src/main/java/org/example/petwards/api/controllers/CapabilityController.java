@@ -25,7 +25,7 @@ public class CapabilityController {
 
     private final CapabilityService capabilityService;
 
-    @Operation(summary = "Returns all Capabilities")
+    @Operation(summary = "Returns all capabilities")
     @GetMapping
     public ResponseEntity<CustomPage<CapabilityDTO>> getAllCapabilities(
             @RequestParam(required = false, defaultValue = "1") int page,
@@ -39,7 +39,7 @@ public class CapabilityController {
         return ResponseEntity.ok(result);
     }
 
-    @Operation(summary = "Returns Capabilities by Id")
+    @Operation(summary = "Returns a capability with specified id")
     @GetMapping("/{id}")
     public ResponseEntity<CapabilityDTO> getCapabilityById(@PathVariable Long id) {
         try {
@@ -51,7 +51,7 @@ public class CapabilityController {
     }
 
 
-    @Operation(summary = "Create Capability")
+    @Operation(summary = "Creates a new capability")
     @PostMapping
     public ResponseEntity<CapabilityDTO> createCapability(
             @Valid @RequestBody CapabilityForm capabilityform
