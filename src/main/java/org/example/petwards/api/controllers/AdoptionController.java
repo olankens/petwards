@@ -1,5 +1,6 @@
 package org.example.petwards.api.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.example.petwards.api.models.CustomPage;
 import org.example.petwards.api.models.adoptions.dtos.AdoptionDTO;
@@ -21,6 +22,7 @@ public class AdoptionController {
 
     private final AdoptionService adoptionService;
 
+    @Operation(summary = "Returns all adoptions with pending status")
     @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('STAFF')")
     @GetMapping("/pending")
     public ResponseEntity<CustomPage<AdoptionDTO>> getPendingAdoptions(
@@ -35,7 +37,7 @@ public class AdoptionController {
         return ResponseEntity.ok(new CustomPage<>(adoptionDTOs, page, size));
     }
 
-
+    @Operation(summary = "Returns all adoptions with approved status")
     @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('STAFF')")
     @GetMapping("/approved")
     public ResponseEntity<CustomPage<AdoptionDTO>> getApprovedAdoptions(
@@ -49,6 +51,7 @@ public class AdoptionController {
         return ResponseEntity.ok(new CustomPage<>(adoptionDTOs, page, size));
     }
 
+    @Operation(summary = "Approves an adoption")
     @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('STAFF')")
     @PutMapping("/approve/{id}")
     public ResponseEntity<AdoptionDTO> approveAdoption(
@@ -56,13 +59,13 @@ public class AdoptionController {
     ) {
         try {
             Adoption adoption = adoptionService.approveAdoption(id);
-
             return new ResponseEntity<>(AdoptionDTO.fromAdoption(adoption), HttpStatus.OK);
         } catch (PetwardsAdoptionNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
+    @Operation(summary = "Rejects an adoption")
     @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('STAFF')")
     @PutMapping("/reject/{id}")
     public ResponseEntity<AdoptionDTO> rejectAdoption(
@@ -70,22 +73,9 @@ public class AdoptionController {
     ) {
         try {
             Adoption adoption = adoptionService.rejectAdoption(id);
-
             return new ResponseEntity<>(AdoptionDTO.fromAdoption(adoption), HttpStatus.OK);
         } catch (PetwardsAdoptionNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
-
-    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('STAFF')")
-    @GetMapping
-    public ResponseEntity<List<AdoptionDTO>> getAllPendingAdoptions(
-    ){
-        List<Adoption> adoptions = adoptionService.getPendingAdoption(
-        );
-        List<AdoptionDTO> dtos = adoptions.stream()
-                .map(AdoptionDTO::fromAdoption)
-                .toList();
-        return ResponseEntity.ok(dtos);
     }
 }
