@@ -1,5 +1,6 @@
 package org.example.petwards.api.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.petwards.api.models.security.dtos.WizardSessionDTO;
@@ -24,6 +25,7 @@ public class AuthController {
     private final AuthService authService;
     private final JwtUtil jwtUtil;
 
+    @Operation(summary = "Registers a new wizard with adopter role")
     @PreAuthorize("isAnonymous()")
     @PostMapping("/register")
     public ResponseEntity<Void> register(
@@ -35,6 +37,7 @@ public class AuthController {
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "Logins any already registered wizard")
     @PreAuthorize("isAnonymous()")
     @PostMapping("/login")
     public ResponseEntity<WizardTokenDTO> login(
