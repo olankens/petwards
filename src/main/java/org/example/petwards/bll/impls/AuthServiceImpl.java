@@ -18,7 +18,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public void register(Wizard wizard) {
         if (wizardRepository.existsByEmail(wizard.getEmail())) {
-            // TODO: Create new custom exception
+
             throw new RuntimeException();
         }
         wizard.setPassword(passwordEncoder.encode(wizard.getPassword()));
@@ -29,11 +29,11 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public Wizard login(String email, String password) {
         Wizard wizard = wizardRepository.findByEmail(email).orElseThrow(
-                // TODO: Create new custom exception
+
                 () -> new RuntimeException("")
         );
         if (!passwordEncoder.matches(password, wizard.getPassword())) {
-            // TODO: Create new custom exception
+
             throw new RuntimeException();
         }
         return wizard;

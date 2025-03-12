@@ -33,8 +33,6 @@ public class BeastController {
             @RequestParam(required = false, defaultValue = "5") int size,
             @RequestParam(required = false) String name,
             @RequestParam(required = false) List<String> capabilities
-            // TODO: Add filter by name
-            // TODO: Add filter by capability list
     ) {
         Page<Beast> beasts = beastService.findAllByNameAndCapability(PageRequest.of(
                 page - 1, size, Sort.by(Sort.Direction.ASC, "id")

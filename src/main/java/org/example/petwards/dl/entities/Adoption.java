@@ -33,12 +33,11 @@ public class Adoption {
     private Wizard wizard;
 
     public Adoption(AdoptionStatus adoptionStatus) {
-        this();
         this.status = status;
     }
 
+
     public Adoption(AdoptionStatus adoptionStatus, Beast beast, Wizard wizard) {
-        this();
         this.status = AdoptionStatus.PENDING;
         this.beast = beast;
         this.wizard = wizard;

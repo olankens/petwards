@@ -1,5 +1,6 @@
 package org.example.petwards.api.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.example.petwards.api.models.shelters.dtos.ShelterDTO;
 import org.example.petwards.bll.ShelterService;
@@ -19,6 +20,7 @@ public class ShelterController {
 
     private final ShelterService shelterService;
 
+    @Operation(summary = "Returns all Shelters")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'STAFF')")
     @GetMapping
     public ResponseEntity<List<ShelterDTO>> getAllShelters() {
@@ -29,6 +31,7 @@ public class ShelterController {
         return new ResponseEntity<>(shelterDTOs, HttpStatus.OK);
     }
 
+    @Operation(summary = "Returns Shelter by Id")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'STAFF')")
     @GetMapping("/{id}")
     public ResponseEntity<ShelterDTO> getShelterById(@PathVariable Long id) {
@@ -40,14 +43,13 @@ public class ShelterController {
         }
     }
 
-
+    @Operation(summary = "Update shelter details by shelter ID")
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<ShelterDTO> updateShelter(
             @PathVariable Long id,
             @RequestBody ShelterDTO shelterDTO
     ) {
-        // INFO: We didn't need any id parameters as there is only one shelter
         try {
             Shelter shelter = new Shelter(shelterDTO.name(), shelterDTO.description());
             shelterService.update(id, shelter);

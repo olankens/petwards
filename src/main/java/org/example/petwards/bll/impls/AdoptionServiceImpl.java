@@ -78,35 +78,17 @@ public class AdoptionServiceImpl implements AdoptionService {
     }
 
 
-//    @Override
-//    public Adoption approveAdoption(Long id, String adoptionEmail) {
-//        Adoption adoption = findById(id);
-//        adoption.setStatus(AdoptionStatus.APPROVED);
-//        adoptionRepository.save(adoption);
-//
-//        String subject = "Adoption Acceptée";
-//        String text = "Félicitations! Votre adoption a été acceptée.";
-//        try {
-//            emailService.sendEmail(adoptionEmail, subject, text);
-//        } catch (MessagingException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        return adoption;
-//    }
-
     public Adoption approveAdoption(Long adoptionId) {
         Adoption adoption = adoptionRepository.findById(adoptionId)
                 .orElseThrow(() -> new PetwardsAdoptionNotFoundException("Adoption not found"));
 
-        adoption.setStatus(AdoptionStatus.APPROVED); // Mettre à jour le statut de l'adoption
+        adoption.setStatus(AdoptionStatus.APPROVED);
         adoptionRepository.save(adoption);
 
-        // Envoyer un email pour informer de l'acceptation
         String subject = "Adoption Acceptée";
         String text = "Félicitations! Votre adoption a été acceptée.";
         try {
-            emailService.sendEmail(adoption.getWizard().getEmail(), subject, text);  // Envoie l'email à l'adoptant
+            emailService.sendEmail(adoption.getWizard().getEmail(), subject, text);
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
@@ -114,30 +96,13 @@ public class AdoptionServiceImpl implements AdoptionService {
         return adoption;
     }
 
-//    @Override
-//    public Adoption rejectAdoption(Long id, String adoptionEmail) {
-//        Adoption adoption = findById(id);
-//        adoption.setStatus(AdoptionStatus.REJECTED);
-//        adoptionRepository.save(adoption);
-//
-//        String subject = "Adoption Refusée";
-//        String text = "Désolé, votre adoption a été refusée. Nous vous remercions de votre intérêt.";
-//        try {
-//            emailService.sendEmail(adoptionEmail, subject, text);
-//        } catch (MessagingException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return adoption;
-//    }
-
     public Adoption rejectAdoption(Long adoptionId) {
         Adoption adoption = adoptionRepository.findById(adoptionId)
                 .orElseThrow(() -> new PetwardsAdoptionNotFoundException("Adoption not found"));
 
-        adoption.setStatus(AdoptionStatus.REJECTED); // Mettre à jour le statut de l'adoption
+        adoption.setStatus(AdoptionStatus.REJECTED);
         adoptionRepository.save(adoption);
 
-        // Envoyer un email pour informer du refus
         String subject = "Adoption Refusée";
         String text = "Désolé, votre adoption a été refusée. Nous vous remercions de votre intérêt.";
         try {

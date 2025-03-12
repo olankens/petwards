@@ -1,5 +1,6 @@
 package org.example.petwards.api.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.petwards.api.models.CustomPage;
@@ -24,6 +25,7 @@ public class CapabilityController {
 
     private final CapabilityService capabilityService;
 
+    @Operation(summary = "Returns all Capabilities")
     @GetMapping
     public ResponseEntity<CustomPage<CapabilityDTO>> getAllCapabilities(
             @RequestParam(required = false, defaultValue = "1") int page,
@@ -37,6 +39,7 @@ public class CapabilityController {
         return ResponseEntity.ok(result);
     }
 
+    @Operation(summary = "Returns Capabilities by Id")
     @GetMapping("/{id}")
     public ResponseEntity<CapabilityDTO> getCapabilityById(@PathVariable Long id) {
         try {
@@ -48,6 +51,7 @@ public class CapabilityController {
     }
 
 
+    @Operation(summary = "Create Capability")
     @PostMapping
     public ResponseEntity<CapabilityDTO> createCapability(
             @Valid @RequestBody CapabilityForm capabilityform
@@ -55,10 +59,6 @@ public class CapabilityController {
         Capability capability = capabilityform.toCapability();
         capabilityService.createCapability(capability);
         return ResponseEntity.noContent().build();
-
-//        Long id = capabilityService.save(capability).getId();
-//        UriComponents uriComponents = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id);
-//        return ResponseEntity.created(uriComponents.toUri()).build();
     }
 
 

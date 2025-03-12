@@ -55,10 +55,8 @@ public class AdoptionController {
             @PathVariable Long id
     ) {
         try {
-            // Appeler le service pour approuver l'adoption et envoyer l'email
             Adoption adoption = adoptionService.approveAdoption(id);
 
-            // Retourner la réponse avec l'adoption mise à jour
             return new ResponseEntity<>(AdoptionDTO.fromAdoption(adoption), HttpStatus.OK);
         } catch (PetwardsAdoptionNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -71,10 +69,8 @@ public class AdoptionController {
             @PathVariable Long id
     ) {
         try {
-            // Appeler le service pour rejeter l'adoption et envoyer l'email
             Adoption adoption = adoptionService.rejectAdoption(id);
 
-            // Retourner la réponse avec l'adoption mise à jour
             return new ResponseEntity<>(AdoptionDTO.fromAdoption(adoption), HttpStatus.OK);
         } catch (PetwardsAdoptionNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

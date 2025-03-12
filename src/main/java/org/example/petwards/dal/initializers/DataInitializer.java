@@ -207,23 +207,6 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     public void saveDefaultAdoptions() {
-//        Set<Capability> forTry = Set.of(new Capability("try"), new Capability("same"));
-//        String defaultPasswordForAdopters = "adopter";
-//        Wizard tryWizard = new Wizard(
-//                "try",
-//                "same",
-//                "try@gmail.com",
-//                passwordEncoder.encode(defaultPasswordForAdopters),
-//                WizardHouse.HUFFLEPUFF,
-//                ShelterRole.ADOPTER
-//        );
-//        Beast tryBeast = new Beast(
-//                "Majestic Try",
-//                true,
-//                DangerLevel.LOW,
-//                null,
-//                forTry
-//        );
         Beast fret = beastRepository.findById(4L).orElseThrow();
         Wizard wiz = wizardRepository.findById(3L).orElseThrow();
         wiz.getAdoptions().add(new Adoption(AdoptionStatus.PENDING,fret,wiz ));

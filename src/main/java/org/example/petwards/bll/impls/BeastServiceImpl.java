@@ -91,7 +91,7 @@ public class BeastServiceImpl implements BeastService {
         Capability capability = capabilityRepository.findById(capabilityId)
                 .orElseThrow(() -> new EntityNotFoundException("Capability not found"));
 
-        beast.getCapabilities().add(capability);  // Ajoute la capability
+        beast.getCapabilities().add(capability);
         beastRepository.save(beast);
     }
 
@@ -102,7 +102,7 @@ public class BeastServiceImpl implements BeastService {
         Capability capability = capabilityRepository.findById(capabilityId)
                 .orElseThrow(() -> new EntityNotFoundException("Capability not found"));
 
-        beast.getCapabilities().remove(capability);  // Retire la capability
+        beast.getCapabilities().remove(capability);
         beastRepository.save(beast);
     }
 

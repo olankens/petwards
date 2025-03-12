@@ -44,18 +44,15 @@ public class Beast {
     )
     private Set<Capability> capabilities = new HashSet<>();
 
-    public Beast(String name, boolean isAvailable, DangerLevel dangerLevel, List<Adoption> adoptions, Set<Capability> capability) {
-        this();
-        this.name = name;
-        this.isAvailable = isAvailable;
-        this.dangerLevel = dangerLevel;
-        this.adoptions = adoptions;
-        this.capabilities = capability;
-    }
-
     public Beast( String name, Boolean isAvailable, DangerLevel dangerLevel) {
         this.name = name;
         this.isAvailable = isAvailable;
         this.dangerLevel = dangerLevel;
+    }
+
+    public Beast(String name, boolean isAvailable, DangerLevel dangerLevel, List<Adoption> adoptions, Set<Capability> capability) {
+        this(name, isAvailable, dangerLevel);
+        this.adoptions = adoptions;
+        this.capabilities = capability;
     }
 }

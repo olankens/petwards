@@ -21,9 +21,6 @@ public class Capability {
     @Setter
     private String name;
 
-//    @ManyToMany(mappedBy = "capabilities")
-//    private Set<Beast> beasts = new HashSet<>();
-
     public Capability(String name) {
         this();
         this.name = name;
