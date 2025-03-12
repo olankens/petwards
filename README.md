@@ -1,6 +1,6 @@
 # <samp>OVERVIEW</samp>
 
-Petwards is a powerful and magical API designed to manage the Petwards Shelter, a sanctuary for fantastic beasts and their wizard caretakers. Whether you're handling mischievous nifflers, loyal hippogriffs, or even the occasional dragon, Petwards ensures smooth operations for shelter management, adoptions, and magical creature care.
+Petwards is a powerful API for managing the Petwards Shelter, home to fantastic beasts like nifflers, hippogriffs, and dragons. Built with Spring and a three-tier architecture, it streamlines shelter management, beast creation, and adoption, along with advanced filtering capabilities, all through distinct layers for presentation, business logic, and data access.
 
 <img src="assets/img1.png" width="49.25%"/><img src="assets/img0.png" width="1.5%"/><img src="assets/img2.png" width="49.25%"/>
 
