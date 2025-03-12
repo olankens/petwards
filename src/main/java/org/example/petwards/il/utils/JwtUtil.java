@@ -28,13 +28,13 @@ public class JwtUtil {
     }
 
     public String generateToken(Wizard wizard) {
-        int expireAt = 24 * 60 * 60;
+        long expireAt = 96 * 60 * 60 * 1000L;
         return this.builder
                 .setSubject(wizard.getUsername())
                 .claim("id", wizard.getId())
                 .claim("role", wizard.getShelterRole())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + expireAt * 1000L))
+                .setExpiration(new Date(System.currentTimeMillis() + expireAt))
                 .compact();
     }
 
