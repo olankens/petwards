@@ -1,8 +1,8 @@
 # <samp>OVERVIEW</samp>
 
-Petwards is a powerful API for managing Petwards, shelter for fantastic beasts like nifflers, hippogriffs, and dragons.
-Built with Spring and a three-tier architecture, it streamlines shelter management, beast creation, and adoption, along with advanced filtering capabilities, all through distinct layers for presentation, business logic, and data access.
-Developed as a group project, it was built by [clawyn](https://github.com/clawyn), [olankens](https://github.com/olankens), and [titou](https://github.com/DelaunoisThibault).
+API for managing Petwards, a shelter for fantastic beasts like nifflers, hippogriffs, and dragons.
+Built with the Spring framework and a three-tier architecture, it streamlines shelter management, beast creation, and adoption, along with advanced filtering capabilities, all through distinct layers for presentation, business logic, and data access.
+Developed as a group project by [clawyn](https://github.com/clawyn), [olankens](https://github.com/olankens), and [titou](https://github.com/DelaunoisThibault).
 
 <img src="assets/img1.png" width="49.25%"/><img src="assets/img0.png" width="1.5%"/><img src="assets/img2.png" width="49.25%"/>
 
