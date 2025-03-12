@@ -6,7 +6,7 @@ import org.example.petwards.api.models.CustomPage;
 import org.example.petwards.api.models.staffs.dtos.StaffDTO;
 import org.example.petwards.api.models.staffs.forms.StaffForm;
 import org.example.petwards.bll.StaffService;
-import org.example.petwards.bll.exceptions.StaffNotFoundException;
+import org.example.petwards.bll.exceptions.PetwardsStaffNotFoundException;
 import org.example.petwards.dl.entities.Wizard;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,7 +47,7 @@ public class StaffController {
         try {
             Wizard wizard = staffService.findById(id);
             return new ResponseEntity<>(StaffDTO.fromWizardStaff(wizard), HttpStatus.OK);
-        } catch (StaffNotFoundException e) {
+        } catch (PetwardsStaffNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

@@ -9,10 +9,8 @@ import org.example.petwards.api.models.beasts.forms.BeastForm;
 import org.example.petwards.api.models.capabilities.dtos.CapabilityDTO;
 import org.example.petwards.api.models.capabilities.forms.CapabilityForm;
 import org.example.petwards.bll.BeastService;
-import org.example.petwards.bll.exceptions.ShelterNotFoundException;
-import org.example.petwards.dal.repositories.BeastRepository;
+import org.example.petwards.bll.exceptions.PetwardsBeastNotFoundException;
 import org.example.petwards.dl.entities.Beast;
-import org.example.petwards.dl.entities.Capability;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -22,7 +20,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -30,26 +27,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/beast")
 public class BeastController {
 
-    private final BeastRepository beastRepository;
     private final BeastService beastService;
 
-//    @GetMapping
-//    public ResponseEntity<CustomPage<BeastDTO>> getAllBeast(
-//            @RequestParam(required = false, defaultValue = "1") int page,
-//            @RequestParam(required = false, defaultValue = "5") int size
-//            // TODO: Add filter by name
-//            // TODO: Add filter by capability list
-//    ) {
-//        Page<Beast> beasts = beastService.findAll(PageRequest.of(
-//                page - 1, size, Sort.by(Sort.Direction.ASC, "id")
-//        ));
-//        List<BeastDTO> beastsDTOs = beasts.getContent().stream()
-//                .map(BeastDTO::fromBeast)
-//                .toList();
-//        CustomPage<BeastDTO> result = new CustomPage<>(beastsDTOs, beasts.getTotalPages(), beasts.getNumber() + 1);
-//        ResponseEntity<CustomPage<BeastDTO>> responseResult = ResponseEntity.ok(result);
-//        return responseResult;
-//    }
 
     @Operation(summary = "Returns all beasts with or without name and/or capability")
     @GetMapping
@@ -58,8 +37,6 @@ public class BeastController {
             @RequestParam(required = false, defaultValue = "5") int size,
             @RequestParam(required = false) String name,
             @RequestParam(required = false) List<String> capabilities
-            // TODO: Add filter by name
-            // TODO: Add filter by capability list
     ) {
         Page<Beast> beasts = beastService.findAllByNameAndCapability(PageRequest.of(
                 page - 1, size, Sort.by(Sort.Direction.ASC, "id")
@@ -77,7 +54,7 @@ public class BeastController {
         try {
             Beast beast = beastService.findById(id);
             return new ResponseEntity<>(BeastDTO.fromBeast(beast), HttpStatus.OK);
-        } catch (ShelterNotFoundException e) {
+        } catch ( PetwardsBeastNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -120,4 +97,5 @@ public class BeastController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
 }

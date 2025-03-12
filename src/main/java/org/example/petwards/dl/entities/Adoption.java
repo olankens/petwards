@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.example.petwards.dl.enums.AdoptionStatus;
 
+import java.util.Optional;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,23 +22,22 @@ public class Adoption {
     @Setter
     private AdoptionStatus status = AdoptionStatus.PENDING;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "beast_id")
     @Setter
     private Beast beast;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "wizard_id")
     @Setter
     private Wizard wizard;
 
     public Adoption(AdoptionStatus adoptionStatus) {
-        this();
         this.status = status;
     }
 
-    public Adoption(String adoptionStatus, Beast beast, Wizard wizard) {
-        this();
+
+    public Adoption(AdoptionStatus adoptionStatus, Beast beast, Wizard wizard) {
         this.status = AdoptionStatus.PENDING;
         this.beast = beast;
         this.wizard = wizard;

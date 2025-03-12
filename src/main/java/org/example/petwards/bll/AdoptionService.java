@@ -3,6 +3,7 @@ package org.example.petwards.bll;
 
 
 import org.example.petwards.dl.entities.Adoption;
+import org.example.petwards.dl.enums.AdoptionStatus;
 
 import java.util.List;
 
@@ -12,8 +13,9 @@ public interface AdoptionService {
     List<Adoption> findAll();
     void update(Long id, Adoption adoption);
     void deleteById(Long id);
+    List<Adoption> findAllByPending();
     List<Adoption> getPendingAdoption();
     List<Adoption> getApproveAdoption();
-    Adoption approveAdoption(Long id, String adoptionEmail);
-    Adoption rejectAdoption(Long id, String adoptionEmail);
+    Adoption approveAdoption(Long id);
+    Adoption rejectAdoption(Long id);
 }

@@ -1,5 +1,6 @@
 package org.example.petwards.api.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.petwards.api.models.CustomPage;
@@ -26,6 +27,7 @@ public class AdopterController {
 
     private final AdopterService adopterService;
 
+    @Operation(summary = "Returns all wizards with adopter role")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'STAFF')")
     @GetMapping
     public ResponseEntity<CustomPage<AdopterDTO>> getAllAdopters(

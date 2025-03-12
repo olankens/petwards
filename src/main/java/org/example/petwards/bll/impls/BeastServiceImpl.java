@@ -27,6 +27,15 @@ public class BeastServiceImpl implements BeastService {
     private final CapabilityRepository capabilityRepository;
 
     @Override
+    public Beast createBeast(Beast beast ){
+        beast.setAdoptions(beast.getAdoptions());
+        beast.setAvailable(beast.isAvailable());
+        beast.setDangerLevel(beast.getDangerLevel());
+        beastRepository.save(beast);
+        return beast;
+    }
+
+    @Override
     public Beast save(Beast beast) {
         if (beastRepository.existsById(beast.getId())){
             throw  new RuntimeException("id already exists");
@@ -62,7 +71,7 @@ public class BeastServiceImpl implements BeastService {
     }
 
     @Override
-    public void update(Long id, Beast beast) {
+    public void updateBeast(Long id, Beast beast) {
         Beast existingBeast = beastRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("id not found")
         );
@@ -89,7 +98,7 @@ public class BeastServiceImpl implements BeastService {
         Capability capability = capabilityRepository.findById(capabilityId)
                 .orElseThrow(() -> new EntityNotFoundException("Capability not found"));
 
-        beast.getCapabilities().add(capability);  // Ajoute la capability
+        beast.getCapabilities().add(capability);
         beastRepository.save(beast);
     }
 
@@ -100,7 +109,7 @@ public class BeastServiceImpl implements BeastService {
         Capability capability = capabilityRepository.findById(capabilityId)
                 .orElseThrow(() -> new EntityNotFoundException("Capability not found"));
 
-        beast.getCapabilities().remove(capability);  // Retire la capability
+        beast.getCapabilities().remove(capability);
         beastRepository.save(beast);
     }
 

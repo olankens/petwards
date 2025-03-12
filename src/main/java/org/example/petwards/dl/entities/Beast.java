@@ -1,6 +1,8 @@
 package org.example.petwards.dl.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.example.petwards.dl.enums.DangerLevel;
 
@@ -34,7 +36,7 @@ public class Beast {
     @Setter
     private List<Adoption> adoptions;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "beast_capabilities",
             joinColumns = @JoinColumn(name = "beast_id"),
@@ -54,6 +56,10 @@ public class Beast {
         this.name = name;
         this.isAvailable = isAvailable;
         this.dangerLevel = dangerLevel;
+    }
+
+    public Beast(String name, boolean isAvailable, DangerLevel dangerLevel, List<Adoption> adoptions, Set<Capability> capability) {
+        this(name, isAvailable, dangerLevel);
         this.adoptions = adoptions;
         this.capabilities = capability;
     }

@@ -15,4 +15,6 @@ public interface CapabilityService {
     void update(Long id, Capability capability);
 
     void deleteById(Long id);
+
+    Capability createCapability(Capability capability);
 }

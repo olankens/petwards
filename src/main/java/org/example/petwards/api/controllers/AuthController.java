@@ -29,8 +29,6 @@ public class AuthController {
     public ResponseEntity<Void> register(
             @Valid @RequestBody() RegisterForm form
     ) {
-        // INFO: Only adopters can be registered via this endpoint
-        // as a staff can only be created by the admin or other staffs
         authService.register(form.toWizard());
         return ResponseEntity.noContent().build();
     }
