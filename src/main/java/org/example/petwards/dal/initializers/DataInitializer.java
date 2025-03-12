@@ -173,7 +173,7 @@ public class DataInitializer implements CommandLineRunner {
                             true,
                             DangerLevel.INSANE,
                             null,
-                            forLow
+                            forInsane
                     ),
                     new Beast(
                             "Aragog the Acromantula",

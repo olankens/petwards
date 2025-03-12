@@ -3,10 +3,13 @@ package org.example.petwards.bll.impls;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.example.petwards.bll.AdoptionService;
+import org.example.petwards.bll.BeastService;
 import org.example.petwards.bll.EmailService;
 import org.example.petwards.bll.exceptions.PetwardsAdoptionNotFoundException;
 import org.example.petwards.dal.repositories.AdoptionRepository;
+import org.example.petwards.dal.repositories.BeastRepository;
 import org.example.petwards.dl.entities.Adoption;
+import org.example.petwards.dl.entities.Beast;
 import org.example.petwards.dl.enums.AdoptionStatus;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,8 @@ public class AdoptionServiceImpl implements AdoptionService {
 
     private final AdoptionRepository adoptionRepository;
     private final EmailService emailService;
+    private final BeastService beastService;
+    private final BeastRepository beastRepository;
 
     @Override
     public Adoption save(Adoption adoption) {
@@ -74,9 +79,11 @@ public class AdoptionServiceImpl implements AdoptionService {
         Adoption adoption = adoptionRepository.findById(adoptionId).orElseThrow(
                 () -> new PetwardsAdoptionNotFoundException("Adoption not found")
         );
+        Beast beast = adoption.getBeast();
+        beast.setAvailable(false);
+        beastRepository.save(beast);
         adoption.setStatus(AdoptionStatus.APPROVED);
         adoptionRepository.save(adoption);
-        adoption.getBeast().setAvailable(false);
         String subject = "Adoption Accepted";
         String text = "Congratulations! Your adoption has been accepted.";
         try {

@@ -14,5 +14,6 @@ public interface BeastRepository extends JpaRepository<Beast, Long>, JpaSpecific
     Optional<Beast> findById(Long id);
     boolean existsById(Long id);
     Page<Beast> findAllByNameLikeIgnoreCaseAndCapabilitiesContainingIgnoreCase(
-            Pageable pageable, String name, Set<Capability> capabilities);
+            Pageable pageable, String name, Set<Capability> capabilities
+    );
 }
