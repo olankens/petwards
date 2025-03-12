@@ -1,5 +1,6 @@
 package org.example.petwards.api.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.petwards.api.models.CustomPage;
@@ -50,6 +51,7 @@ public class BeastController {
 //        return responseResult;
 //    }
 
+    @Operation(summary = "Returns all beasts with or without name and/or capability")
     @GetMapping
     public ResponseEntity<CustomPage<BeastDTO>> getBeastsByNameAndCapabilities(
             @RequestParam(required = false, defaultValue = "1") int page,
@@ -69,6 +71,7 @@ public class BeastController {
         return ResponseEntity.ok(result);
     }
 
+    @Operation(summary = "Returns a beast with specified id (if exists)")
     @GetMapping("/{id}")
     public ResponseEntity<BeastDTO> getBeastById(@PathVariable Long id) {
         try {
@@ -79,6 +82,7 @@ public class BeastController {
         }
     }
 
+    @Operation(summary = "Creates a new beast")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'STAFF')")
     @PostMapping
     public ResponseEntity<BeastDTO> createBeast(
@@ -89,6 +93,7 @@ public class BeastController {
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "Updates a beast with specified id (if exists)")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'STAFF')")
     @PutMapping("/{id}")
     public ResponseEntity<BeastDTO> updateBeast(
@@ -104,6 +109,7 @@ public class BeastController {
         }
     }
 
+    @Operation(summary = "Deletes a beast with specified id (if exists)")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'STAFF')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBeast(@PathVariable Long id) {

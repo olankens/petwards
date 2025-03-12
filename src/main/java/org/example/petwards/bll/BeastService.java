@@ -1,7 +1,5 @@
 package org.example.petwards.bll;
 
-
-
 import org.example.petwards.dl.entities.Beast;
 import org.example.petwards.dl.entities.Capability;
 import org.springframework.data.domain.Page;
