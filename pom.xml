@@ -10,9 +10,9 @@
     </parent>
     <groupId>org.example</groupId>
     <artifactId>petwards</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>petwards</name>
-    <description>petwards</description>
+    <description>Spring API for managing fantastic beasts</description>
     <url/>
     <licenses>
         <license/>
