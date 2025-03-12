@@ -44,6 +44,7 @@ public class AdopterController {
         return ResponseEntity.ok(results);
     }
 
+    @Operation(summary = "Returns a single wizard with adopter role")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'ADOPTER', 'STAFF')")
     @GetMapping("/{id}")
     public ResponseEntity<AdopterDTO> getById(
@@ -60,6 +61,7 @@ public class AdopterController {
         return ResponseEntity.ok(dto);
     }
 
+    @Operation(summary = "Updates the wizard with adopter role")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'ADOPTER', 'STAFF')")
     @PutMapping("/{id}")
     public ResponseEntity<AdopterDTO> updateAdopter(
@@ -76,6 +78,7 @@ public class AdopterController {
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "Deletes the wizard with adopter role")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'ADOPTER', 'STAFF')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAdopter(
@@ -91,13 +94,14 @@ public class AdopterController {
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "Adopts a beast")
     @PreAuthorize("hasAnyAuthority('ADOPTER')")
-    @PostMapping("/{id}")
+    @PostMapping("/adopt/{beastId}")
     public ResponseEntity<Void> adoptBeast(
-            @PathVariable Long id,
+            @PathVariable Long beastId,
             @AuthenticationPrincipal Wizard current
     ) {
-        adopterService.adoptBeast(id, current);
+        adopterService.adoptBeast(beastId, current);
         return ResponseEntity.noContent().build();
     }
 }

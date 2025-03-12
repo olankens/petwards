@@ -1,5 +1,6 @@
 package org.example.petwards.api.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.petwards.api.models.CustomPage;
@@ -23,6 +24,7 @@ public class StaffController {
 
     private final StaffService staffService;
 
+    @Operation(summary = "Returns all wizards with staff role")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'STAFF')")
     @GetMapping
     public ResponseEntity<CustomPage<StaffDTO>> getAllStaffs(
@@ -38,6 +40,7 @@ public class StaffController {
         return ResponseEntity.ok(new CustomPage<>(staffDTOs, page, size));
     }
 
+    @Operation(summary = "Returns a single wizard with staff role")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'STAFF')")
     @GetMapping("/{id}")
     public ResponseEntity<StaffDTO> findById(
@@ -52,7 +55,7 @@ public class StaffController {
         }
     }
 
-
+    @Operation(summary = "Creates a new wizard with staff role")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'STAFF')")
     @PostMapping
     public ResponseEntity<StaffDTO> createStaff(
@@ -63,6 +66,7 @@ public class StaffController {
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "Updates the wizard with staff role")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'STAFF')")
     @PutMapping("/{id}")
     public ResponseEntity<StaffDTO> updateStaff(

@@ -9,10 +9,8 @@ public record StaffForm(
        String email,
        String password,
        WizardHouse wizardHouse
-
 ) {
     public Wizard toWizard  () {
-
         return new Wizard(this.firstName,this.lastName, this.email, this.password, this.wizardHouse);
     }
 }

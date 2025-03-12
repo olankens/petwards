@@ -2,7 +2,10 @@ package org.example.petwards.dal.initializers;
 
 
 import lombok.RequiredArgsConstructor;
-import org.example.petwards.dal.repositories.*;
+import org.example.petwards.dal.repositories.BeastRepository;
+import org.example.petwards.dal.repositories.CapabilityRepository;
+import org.example.petwards.dal.repositories.ShelterRepository;
+import org.example.petwards.dal.repositories.WizardRepository;
 import org.example.petwards.dl.entities.*;
 import org.example.petwards.dl.enums.AdoptionStatus;
 import org.example.petwards.dl.enums.DangerLevel;
@@ -211,5 +214,12 @@ public class DataInitializer implements CommandLineRunner {
         Wizard wiz = wizardRepository.findById(3L).orElseThrow();
         wiz.getAdoptions().add(new Adoption(AdoptionStatus.PENDING,fret,wiz ));
         wizardRepository.save(wiz);
+    }
+
+    private void saveDefaultAdoptions() {
+        Beast beast = beastRepository.findById(4L).orElseThrow();
+        Wizard wizard = wizardRepository.findByEmail("harry@gmail.com").orElseThrow();
+        wizard.getAdoptions().add(new Adoption(AdoptionStatus.PENDING, beast, wizard));
+        wizardRepository.save(wizard);
     }
 }

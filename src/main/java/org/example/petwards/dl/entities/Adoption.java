@@ -36,9 +36,9 @@ public class Adoption {
         this.status = status;
     }
 
-
     public Adoption(AdoptionStatus adoptionStatus, Beast beast, Wizard wizard) {
-        this.status = AdoptionStatus.PENDING;
+        this();
+        this.status = adoptionStatus;
         this.beast = beast;
         this.wizard = wizard;
     }

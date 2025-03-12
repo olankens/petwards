@@ -11,8 +11,10 @@ import org.example.petwards.dl.entities.Wizard;
 import org.example.petwards.dl.enums.ShelterRole;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +33,7 @@ public class AdopterServiceImpl implements AdopterService {
     @Override
     public Wizard findById(Long id) {
         return wizardRepository.findByShelterRoleAndId(ShelterRole.ADOPTER, id).orElseThrow(
-                () -> new RuntimeException("id not found")
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No adopter found with id: " + id)
         );
     }
 
@@ -72,7 +74,6 @@ public class AdopterServiceImpl implements AdopterService {
         adoption.setBeast(beast);
         adoption.setWizard(adopter);
         adopter.getAdoptions().add(adoption);
-        adoptionRepository.save(adoption);
         wizardRepository.save(adopter);
     }
 }
