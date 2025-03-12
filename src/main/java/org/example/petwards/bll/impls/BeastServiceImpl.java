@@ -1,6 +1,5 @@
 package org.example.petwards.bll.impls;
 
-
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.example.petwards.bll.BeastService;
@@ -8,7 +7,6 @@ import org.example.petwards.dal.repositories.BeastRepository;
 import org.example.petwards.dal.repositories.CapabilityRepository;
 import org.example.petwards.dl.entities.Beast;
 import org.example.petwards.dl.entities.Capability;
-import org.example.petwards.dl.enums.ShelterRole;
 import org.example.petwards.il.filters.specifications.BeastSpecification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,18 +14,16 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 public class BeastServiceImpl implements BeastService {
 
     private final BeastRepository beastRepository;
-
     private final CapabilityRepository capabilityRepository;
 
     @Override
-    public Beast createBeast(Beast beast ){
+    public Beast createBeast(Beast beast) {
         beast.setAdoptions(beast.getAdoptions());
         beast.setAvailable(beast.isAvailable());
         beast.setDangerLevel(beast.getDangerLevel());
@@ -37,15 +33,9 @@ public class BeastServiceImpl implements BeastService {
 
     @Override
     public Beast save(Beast beast) {
-        if (beastRepository.existsById(beast.getId())){
-            throw  new RuntimeException("id already exists");
+        if (beastRepository.existsById(beast.getId())) {
+            throw new RuntimeException("id already exists");
         }
-        beastRepository.save(beast);
-        return beast;
-    }
-
-    @Override
-    public Beast createBeast(Beast beast) {
         beastRepository.save(beast);
         return beast;
     }
@@ -71,7 +61,7 @@ public class BeastServiceImpl implements BeastService {
     }
 
     @Override
-    public void updateBeast(Long id, Beast beast) {
+    public void update(Long id, Beast beast) {
         Beast existingBeast = beastRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("id not found")
         );
@@ -80,24 +70,21 @@ public class BeastServiceImpl implements BeastService {
         existingBeast.setDangerLevel(beast.getDangerLevel());
         existingBeast.setAdoptions(beast.getAdoptions());
         beastRepository.save(existingBeast);
-
     }
 
     @Override
     public void deleteById(Long id) {
-        if (!beastRepository.existsById(id)){
-            throw  new RuntimeException("id not found");
+        if (!beastRepository.existsById(id)) {
+            throw new RuntimeException("id not found");
         }
         beastRepository.deleteById(id);
-
     }
+
     public void addCapabilityToBeast(Long beastId, Long capabilityId) {
         Beast beast = beastRepository.findById(beastId)
                 .orElseThrow(() -> new EntityNotFoundException("Beast not found"));
-
         Capability capability = capabilityRepository.findById(capabilityId)
                 .orElseThrow(() -> new EntityNotFoundException("Capability not found"));
-
         beast.getCapabilities().add(capability);
         beastRepository.save(beast);
     }
@@ -112,7 +99,4 @@ public class BeastServiceImpl implements BeastService {
         beast.getCapabilities().remove(capability);
         beastRepository.save(beast);
     }
-
-
-
 }

@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/laboapipetward
-    username: postgres
-    password: postgres123
+    url: jdbc:postgresql://localhost:5432/petwards
+    username: master
+    password:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

@@ -16,7 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -39,7 +38,7 @@ public class DataInitializer implements CommandLineRunner {
         saveDefaultAdoptions();
     }
 
-    public void saveDefaultWizards() {
+    private void saveDefaultWizards() {
         if (wizardRepository.count() == 0) {
             String defaultPasswordForAdmins = "admin";
             String defaultPasswordForStaffs = "staff";
@@ -160,7 +159,7 @@ public class DataInitializer implements CommandLineRunner {
         }
     }
 
-    public void saveDefaultBeasts() {
+    private void saveDefaultBeasts() {
         if (beastRepository.count() == 0) {
             Set<Capability> forLow = Set.of(new Capability("coffee"), new Capability("cooking"));
             Set<Capability> forMedium = Set.of(new Capability("flying"), new Capability("proud"));
@@ -202,18 +201,9 @@ public class DataInitializer implements CommandLineRunner {
         }
     }
 
-    public void saveDefaultShelters() {
+    private void saveDefaultShelters() {
         Shelter shelter = new Shelter("petward", "");
         shelterRepository.save(shelter);
-
-
-    }
-
-    public void saveDefaultAdoptions() {
-        Beast fret = beastRepository.findById(4L).orElseThrow();
-        Wizard wiz = wizardRepository.findById(3L).orElseThrow();
-        wiz.getAdoptions().add(new Adoption(AdoptionStatus.PENDING,fret,wiz ));
-        wizardRepository.save(wiz);
     }
 
     private void saveDefaultAdoptions() {

@@ -6,8 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.example.petwards.api.models.CustomPage;
 import org.example.petwards.api.models.beasts.dtos.BeastDTO;
 import org.example.petwards.api.models.beasts.forms.BeastForm;
-import org.example.petwards.api.models.capabilities.dtos.CapabilityDTO;
-import org.example.petwards.api.models.capabilities.forms.CapabilityForm;
 import org.example.petwards.bll.BeastService;
 import org.example.petwards.bll.exceptions.PetwardsBeastNotFoundException;
 import org.example.petwards.dl.entities.Beast;
@@ -54,7 +52,7 @@ public class BeastController {
         try {
             Beast beast = beastService.findById(id);
             return new ResponseEntity<>(BeastDTO.fromBeast(beast), HttpStatus.OK);
-        } catch ( PetwardsBeastNotFoundException e) {
+        } catch (PetwardsBeastNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -77,25 +75,18 @@ public class BeastController {
             @PathVariable Long id,
             @Valid @RequestBody BeastForm form
     ) {
-        try {
-            Beast beast = form.toBeast();
-            beastService.update(id, beast);
-            return ResponseEntity.noContent().build();
-        } catch (ShelterNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+
+        Beast beast = form.toBeast();
+        beastService.update(id, beast);
+        return ResponseEntity.noContent().build();
     }
 
     @Operation(summary = "Deletes a beast with specified id (if exists)")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'STAFF')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBeast(@PathVariable Long id) {
-        try {
-            beastService.deleteById(id);
-            return ResponseEntity.noContent().build();
-        } catch (ShelterNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        beastService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

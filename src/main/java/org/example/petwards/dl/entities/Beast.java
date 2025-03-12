@@ -1,8 +1,6 @@
 package org.example.petwards.dl.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.example.petwards.dl.enums.DangerLevel;
 
@@ -45,13 +43,6 @@ public class Beast {
     private Set<Capability> capabilities = new HashSet<>();
 
     public Beast(String name, boolean isAvailable, DangerLevel dangerLevel) {
-        this();
-        this.name = name;
-        this.isAvailable = isAvailable;
-        this.dangerLevel = dangerLevel;
-    }
-
-    public Beast(String name, boolean isAvailable, DangerLevel dangerLevel, List<Adoption> adoptions, Set<Capability> capability) {
         this();
         this.name = name;
         this.isAvailable = isAvailable;
