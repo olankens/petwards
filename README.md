@@ -9,8 +9,9 @@ Developed as a group project by [clawyn](https://github.com/clawyn), [olankens](
 # <samp>FEATURES</samp>
 
 - Anonymous can list and filter beasts
+- Anonymous can register as adopter
 - Filter beasts by name and capabilities
-- Three roles: adopter, staff and admin
+- Three wizard roles: adopter, staff and admin
 - Only adopters can adopt beasts
 - Only staffs can approve or reject adoption
 - Only staffs and admins can add beasts
@@ -18,7 +19,7 @@ Developed as a group project by [clawyn](https://github.com/clawyn), [olankens](
 
 # <samp>GUIDANCE</samp>
 
-### ERD diagram
+### ER diagram
 
 <img src="assets/erd1.jpg" width="100%"/>
 
