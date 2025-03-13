@@ -50,7 +50,6 @@ public class StaffServiceImpl implements StaffService {
         existingWizard.setLastName(wizard.getLastName());
         existingWizard.setPassword(wizard.getPassword());
         existingWizard.setEmail(wizard.getEmail());
-        existingWizard.setShelterRole(wizard.getShelterRole());
         existingWizard.setAdoptions(wizard.getAdoptions());
         existingWizard.setWizardHouse(wizard.getWizardHouse());
         wizardRepository.save(existingWizard);

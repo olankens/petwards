@@ -8,6 +8,7 @@ import org.example.petwards.bll.EmailService;
 import org.example.petwards.bll.exceptions.PetwardsAdoptionNotFoundException;
 import org.example.petwards.dal.repositories.AdoptionRepository;
 import org.example.petwards.dl.entities.Adoption;
+import org.example.petwards.dl.entities.Beast;
 import org.example.petwards.dl.enums.AdoptionStatus;
 import org.springframework.stereotype.Service;
 
@@ -82,6 +83,7 @@ public class AdoptionServiceImpl implements AdoptionService {
         Adoption adoption = adoptionRepository.findById(adoptionId)
                 .orElseThrow(() -> new PetwardsAdoptionNotFoundException("Adoption not found"));
 
+
         adoption.setStatus(AdoptionStatus.APPROVED);
         adoptionRepository.save(adoption);
 
@@ -91,6 +93,21 @@ public class AdoptionServiceImpl implements AdoptionService {
             emailService.sendEmail(adoption.getWizard().getEmail(), subject, text);
         } catch (MessagingException e) {
             throw new RuntimeException(e);
+        }
+
+        List<Adoption> otherAdoption = adoptionRepository.findByStatus(AdoptionStatus.PENDING);
+
+        for (Adoption pendingAdoption : otherAdoption) {
+            pendingAdoption.setStatus(AdoptionStatus.REJECTED);
+            adoptionRepository.save(pendingAdoption);
+
+            String pendingSubject = "Mise à jour de votre adoption";
+            String pendingText = "Nous avons le regret de vous informer que l'adoption d'un animal a été approuvée pour une autre demande.";
+            try {
+                emailService.sendEmail(pendingAdoption.getWizard().getEmail(), pendingSubject, pendingText);
+            } catch (MessagingException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         return adoption;

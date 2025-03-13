@@ -1,8 +1,10 @@
 package org.example.petwards.api.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.petwards.api.models.shelters.dtos.ShelterDTO;
+import org.example.petwards.api.models.shelters.forms.ShelterForm;
 import org.example.petwards.bll.ShelterService;
 import org.example.petwards.bll.exceptions.PetwardsShelterNotFoundException;
 import org.example.petwards.dl.entities.Shelter;
@@ -48,14 +50,10 @@ public class ShelterController {
     @PutMapping("/{id}")
     public ResponseEntity<ShelterDTO> updateShelter(
             @PathVariable Long id,
-            @RequestBody ShelterDTO shelterDTO
+            @Valid @RequestBody ShelterForm shelterForm
     ) {
-        try {
-            Shelter shelter = new Shelter(shelterDTO.name(), shelterDTO.description());
-            shelterService.update(id, shelter);
-            return new ResponseEntity<>(ShelterDTO.fromShelter(shelter), HttpStatus.OK);
-        } catch (PetwardsShelterNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        Shelter shelter = shelterForm.toShelter();
+        shelterService.update(id, shelter);
+        return ResponseEntity.noContent().build();
     }
 }
