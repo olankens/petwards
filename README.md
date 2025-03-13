@@ -18,6 +18,10 @@ Developed as a group project by [clawyn](https://github.com/clawyn), [olankens](
 
 # <samp>GUIDANCE</samp>
 
+### ERD diagram
+
+<img src="assets/erd1.jpg" width="100%"/>
+
 ### Clone and open the project
 
 ```shell
