@@ -43,7 +43,7 @@ public class ShelterController {
         }
     }
 
-    @Operation(summary = "Updates a shelter details  with specified id")
+    @Operation(summary = "Updates a shelter details with specified id")
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<ShelterDTO> updateShelter(
