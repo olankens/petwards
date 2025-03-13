@@ -17,4 +17,6 @@ public interface CapabilityService {
     void deleteById(Long id);
 
     Capability createCapability(Capability capability);
+
+    Capability findOrCreateCapabilityByName(String name);
 }

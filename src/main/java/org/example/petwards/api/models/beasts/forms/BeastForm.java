@@ -16,9 +16,14 @@ public record BeastForm(
         @NotBlank @Size(max = 100)
         String name,
         Boolean isAvailable,
-        DangerLevel dangerLevel
+        DangerLevel dangerLevel,
+        List<String> capabilities
 ) {
-        public Beast toBeast(){
-                return new Beast(name, isAvailable, dangerLevel);
+        public Beast toBeast() {
+                return new Beast(
+                        name,
+                        isAvailable,
+                        dangerLevel
+                );
         }
 }

@@ -7,8 +7,11 @@ import org.example.petwards.api.models.CustomPage;
 import org.example.petwards.api.models.beasts.dtos.BeastDTO;
 import org.example.petwards.api.models.beasts.forms.BeastForm;
 import org.example.petwards.bll.BeastService;
+import org.example.petwards.bll.CapabilityService;
 import org.example.petwards.bll.exceptions.PetwardsBeastNotFoundException;
+import org.example.petwards.dal.repositories.CapabilityRepository;
 import org.example.petwards.dl.entities.Beast;
+import org.example.petwards.dl.entities.Capability;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -26,7 +29,7 @@ import java.util.stream.Collectors;
 public class BeastController {
 
     private final BeastService beastService;
-
+    private final CapabilityService capabilityService;
 
     @Operation(summary = "Returns all beasts with or without name and/or capability")
     @GetMapping
@@ -61,12 +64,21 @@ public class BeastController {
     @PreAuthorize("hasAnyAuthority('ADMIN', 'STAFF')")
     @PostMapping
     public ResponseEntity<BeastDTO> createBeast(
-            @Valid @RequestBody BeastForm form
+            @RequestBody BeastForm form
     ) {
         Beast beast = form.toBeast();
+        List<String> capabilities = form.capabilities();
+
+        capabilities.forEach(capability -> {
+           Capability capabilityToAdd = capabilityService.findOrCreateCapabilityByName(capability);
+           beast.getCapabilities().add(capabilityToAdd);
+            // TODO: Create the capability if doesn't exist
+        });
+
         beastService.createBeast(beast);
         return ResponseEntity.noContent().build();
     }
+
 
     @Operation(summary = "Updates a beast with specified id (if exists)")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'STAFF')")

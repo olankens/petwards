@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface CapabilityRepository extends JpaRepository<Capability, Long> {
     Optional<Capability> findById(Long id);
+    Optional<Capability> findByName(String name);
     boolean existsById(Long id);
 }
