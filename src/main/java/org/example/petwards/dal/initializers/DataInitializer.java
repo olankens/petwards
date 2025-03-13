@@ -210,6 +210,11 @@ public class DataInitializer implements CommandLineRunner {
         Beast beast = beastRepository.findById(4L).orElseThrow();
         Wizard wizard = wizardRepository.findByEmail("harry@gmail.com").orElseThrow();
         wizard.getAdoptions().add(new Adoption(AdoptionStatus.PENDING, beast, wizard));
+
+        Beast beast2 = beastRepository.findById(4L).orElseThrow();
+        Wizard wizard2 = wizardRepository.findByEmail("cedric@gmail.com").orElseThrow();
+        wizard2.getAdoptions().add(new Adoption(AdoptionStatus.PENDING, beast2, wizard2));
         wizardRepository.save(wizard);
+        wizardRepository.save(wizard2);
     }
 }

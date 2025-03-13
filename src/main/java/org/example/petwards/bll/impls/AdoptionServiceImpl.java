@@ -76,12 +76,10 @@ public class AdoptionServiceImpl implements AdoptionService {
     }
 
     public Adoption approveAdoption(Long adoptionId) {
-        Adoption adoption = adoptionRepository.findById(adoptionId).orElseThrow(
-                () -> new PetwardsAdoptionNotFoundException("Adoption not found")
-        );
-        Beast beast = adoption.getBeast();
-        beast.setAvailable(false);
-        beastRepository.save(beast);
+        Adoption adoption = adoptionRepository.findById(adoptionId)
+                .orElseThrow(() -> new PetwardsAdoptionNotFoundException("Adoption not found"));
+
+
         adoption.setStatus(AdoptionStatus.APPROVED);
         adoptionRepository.save(adoption);
         String subject = "Adoption Accepted";
@@ -91,6 +89,22 @@ public class AdoptionServiceImpl implements AdoptionService {
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
+
+        List<Adoption> otherAdoption = adoptionRepository.findByStatus(AdoptionStatus.PENDING);
+
+        for (Adoption pendingAdoption : otherAdoption) {
+            pendingAdoption.setStatus(AdoptionStatus.REJECTED);
+            adoptionRepository.save(pendingAdoption);
+
+            String pendingSubject = "Mise à jour de votre adoption";
+            String pendingText = "Nous avons le regret de vous informer que l'adoption d'un animal a été approuvée pour une autre demande.";
+            try {
+                emailService.sendEmail(pendingAdoption.getWizard().getEmail(), pendingSubject, pendingText);
+            } catch (MessagingException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         return adoption;
     }
 
@@ -100,8 +114,8 @@ public class AdoptionServiceImpl implements AdoptionService {
         );
         adoption.setStatus(AdoptionStatus.REJECTED);
         adoptionRepository.save(adoption);
-        String subject = "Adoption Rejected";
         String text = "Sorry, your adoption has been rejected. We thank you for your interest.";
+        String subject = "Adoption Rejected";
         try {
             emailService.sendEmail(adoption.getWizard().getEmail(), subject, text);
         } catch (MessagingException e) {
