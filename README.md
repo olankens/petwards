@@ -1,6 +1,6 @@
 # <samp>OVERVIEW</samp>
 
-Manage petwards, the fantastic beast shelter.
+Manage Petwards, the fantastic beast shelter.
 
 <img src="assets/img1.png" width="49.25%"/><img src="assets/img0.png" width="1.5%"/><img src="assets/img2.png" width="49.25%"/>
 
@@ -25,11 +25,11 @@ Developed as a group project by [clawyn](https://github.com/clawyn), [olankens](
 
 # <samp>GUIDANCE</samp>
 
-### <samp>ER DIAGRAM</samp>
+### ER diagram
 
-<img src="assets/img3.svg" width="100%"/>
+<img src="assets/img3.png" width="100%"/>
 
-### <samp>CLONE AND DEBUG PROJECT</samp>
+### Debug project
 
 ```shell
 git clone https://github.com/olankens/petwards.git
