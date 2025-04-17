@@ -27,7 +27,7 @@ Developed as a group project by [clawyn](https://github.com/clawyn), [olankens](
 
 ### <samp>ER DIAGRAM</samp>
 
-<img src="assets/img3.png" width="100%"/>
+<img src="assets/img3.svg" width="100%"/>
 
 ### <samp>CLONE AND DEBUG PROJECT</samp>
 
