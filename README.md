@@ -6,7 +6,7 @@ Manage Petwards, the fantastic beast shelter.
 
 # <samp>FEEDBACK</samp>
 
-Built with the Spring framework and a three-tier architecture, it streamlines shelter management, beast creation, and adoption, along with advanced filtering capabilities, all through distinct layers for presentation, business logic, and data access.
+REST API built with the Spring framework and a three-tier architecture, it streamlines shelter management, beast creation, and adoption, along with advanced filtering capabilities, all through distinct layers for presentation, business logic, and data access.
 Developed as a group project by [clawyn](https://github.com/clawyn), [olankens](https://github.com/olankens), and [titou](https://github.com/DelaunoisThibault).
 
 # <samp>FEATURES</samp>
@@ -14,13 +14,15 @@ Developed as a group project by [clawyn](https://github.com/clawyn), [olankens](
 - For anonymous wizards
     - List available beasts
     - Filter beasts by their capabilities
+    - Register as adopter
 - For adopter wizards
     - Ask for beast adoption
 - For staff wizards
     - Approve or reject adoptions
-    - Create beasts
+    - Create beasts with capabilities
 - For admin wizards
-    - Create beasts
+    - Create beasts with capabilities
+    - Create staff wizards
     - Update shelter information
 
 # <samp>GUIDANCE</samp>
@@ -29,7 +31,7 @@ Developed as a group project by [clawyn](https://github.com/clawyn), [olankens](
 
 <img src="assets/img3.png" width="100%"/>
 
-### Debug project
+### Clone and debug project
 
 ```shell
 git clone https://github.com/olankens/petwards.git
