@@ -8,7 +8,7 @@ Petwards, the shelter for fantastic beasts. Enchanted with the Spring Boot frame
 
 <img src=".assets/erd.png" width="100%"/>
 
-### Illustrations
+### Magestic Dylan
 
 <img src=".assets/img1.png" width="49.375%"/><img src=".assets/1x1.png" width="1.25%"/><img src=".assets/img2.png" width="49.375%"/>
 
