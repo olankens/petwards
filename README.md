@@ -4,9 +4,13 @@
 
 Petwards, the shelter for fantastic beasts. Enchanted with the Spring Boot framework and a three-tier architecture, its REST API spells make shelter care effortless, summon new creatures into being, and guide adoptions with kindness. With mystical filtering woven through layers of presentation, business logic, and data access, it transforms ordinary shelter management into a sanctuary of wonder. Group project by [clawyn](https://github.com/clawyn), [olankens](https://github.com/olankens), and [titou](https://github.com/DelaunoisThibault).
 
+<hr>
+
 ### ER Diagram
 
 <img src=".assets/erd.png" width="100%"/>
+
+<hr>
 
 ### Magestic Dylan
 
@@ -26,14 +30,20 @@ Dylan, depicted in the image on the left, was once a mighty wizard. In an epic b
 - Filter beasts by their capabilities
 - Register as adopter
 
+<hr>
+
 ### For adopter wizards
 
 - Ask for beast adoption
+
+<hr>
 
 ### For staff wizards
 
 - Approve or reject adoptions
 - Create beasts with capabilities
+
+<hr>
 
 ### For admin wizards
 

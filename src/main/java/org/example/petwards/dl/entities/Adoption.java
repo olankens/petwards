@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.example.petwards.dl.enums.AdoptionStatus;
 
-import java.util.Optional;
-
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,7 +30,7 @@ public class Adoption {
     @Setter
     private Wizard wizard;
 
-    public Adoption(AdoptionStatus adoptionStatus) {
+    public Adoption(AdoptionStatus status) {
         this.status = status;
     }
 
