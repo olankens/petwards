@@ -1,4 +1,10 @@
-<p align="center"><img src=".assets/icon.svg" width="132"/></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset=".assets/icon-dark.png">
+    <img src=".assets/icon-light.png" width="144">
+  </picture>
+</p>
+
 <h1 align="center"><samp>PETWARDS</samp></h1>
 
 <p align="center">Petwards, the shelter for fantastic beasts. Enchanted with the Spring Boot framework and a three-tier architecture, its REST API spells make shelter care effortless, summon new creatures into being, and guide adoptions with kindness. With mystical filtering woven through layers of presentation, business logic, and data access, it transforms ordinary shelter management into a sanctuary of wonder. Group project by <a href="https://github.com/clawyn">clawyn</a>, <a href="https://github.com/olankens">olankens</a>, and <a href="https://github.com/DelaunoisThibault">titou</a>.</p>
