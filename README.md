@@ -13,11 +13,9 @@
 
 <h3 align="center">Magestic Dylan</h3>
 
-<img src=".assets/img1.png" width="49.375%"/><img src=".assets/1x1.png" width="1.25%"/><img src=".assets/img2.png" width="49.375%"/>
+<p align="center">Dylan, depicted in the image on the left, was once a mighty wizard. In an epic battle he lost his powers and his voice, though the index finger of his right hand remained enchanted. It can speak, but only to say 'Good evening' in every language.</p>
 
-<p align="center">Dylan, depicted in the image on the left, was once a mighty wizard. In an epic battle he lost his powers and his voice, though the index finger of his right hand remained enchanted. It can speak, but only to say 'Good evening' in every language. Inspired by our beloved <a href="https://github.com/zevraeno">dylan</a>.</p>
-
-<img src=".assets/dylan1.gif" width="24.0625%"/><img src=".assets/1x1.png" width="1.25%"/><img src=".assets/dylan2.gif" width="24.0625%"/><img src=".assets/1x1.png" width="1.25%"/><img src=".assets/dylan3.gif" width="24.0625%"/><img src=".assets/1x1.png" width="1.25%"/><img src=".assets/dylan4.gif" width="24.0625%"/>
+<img src=".assets/img1.png" width="49.375%"/><img src=".assets/1x1.png" width="1.25%"/><img src=".assets/img2.png" width="49.375%"/><img src=".assets/dylan1.gif" width="24.0625%"/><img src=".assets/1x1.png" width="1.25%"/><img src=".assets/dylan2.gif" width="24.0625%"/><img src=".assets/1x1.png" width="1.25%"/><img src=".assets/dylan3.gif" width="24.0625%"/><img src=".assets/1x1.png" width="1.25%"/><img src=".assets/dylan4.gif" width="24.0625%"/>
 
 <hr>
 
