@@ -11,7 +11,7 @@
 
 <h3 align="center">ER Diagram</h3>
 
-<img src=".assets/erd.png" width="100%"/>
+<picture><source media="(prefers-color-scheme: dark)" srcset=".assets/erd-dark.png"><img src=".assets/erd.png" width="100%"></picture>
 
 ---
 
@@ -19,7 +19,7 @@
 
 <p align="center">Dylan, depicted in the image on the left, was once a mighty wizard. In an epic battle he lost his powers and his voice, though the index finger of his right hand remained enchanted. It can speak, but only to say 'Good evening' in every language.</p>
 
-<img src=".assets/01.png" width="49.375%"/><img src=".assets/00.png" width="1.25%"/><img src=".assets/02.png" width="49.375%"/><img src=".assets/dylan1.gif" width="24.0625%"/><img src=".assets/00.png" width="1.25%"/><img src=".assets/dylan2.gif" width="24.0625%"/><img src=".assets/00.png" width="1.25%"/><img src=".assets/dylan3.gif" width="24.0625%"/><img src=".assets/00.png" width="1.25%"/><img src=".assets/dylan4.gif" width="24.0625%"/>
+<img src=".assets/01.png" width="49.375%"/><img src=".assets/1x1.gif" width="1.25%"/><img src=".assets/02.png" width="49.375%"/><img src=".assets/dylan1.gif" width="24.0625%"/><img src=".assets/1x1.gif" width="1.25%"/><img src=".assets/dylan2.gif" width="24.0625%"/><img src=".assets/1x1.gif" width="1.25%"/><img src=".assets/dylan3.gif" width="24.0625%"/><img src=".assets/1x1.gif" width="1.25%"/><img src=".assets/dylan4.gif" width="24.0625%"/>
 
 ---
 
