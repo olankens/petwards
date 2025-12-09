@@ -30,6 +30,6 @@ Petwards, the shelter for fantastic beasts. Enchanted with the Spring Boot frame
 
 ### ER Diagram
 
-![](.assets/ERD.png)
+![](.assets/erd.png)
 
 <hr>
