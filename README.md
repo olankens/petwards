@@ -2,13 +2,9 @@
 
 # OVERVIEW
 
+![](SOCIAL.png)
+
 Petwards, the shelter for fantastic beasts. Enchanted with the Spring Boot framework and a three-tier architecture, its REST API spells make shelter care effortless, summon new creatures into being, and guide adoptions with kindness. With mystical filtering woven through layers of presentation, business logic, and data access, it transforms ordinary shelter management into a sanctuary of wonder.
-
-<hr>
-
-### AI Illustrations
-
-<img src=".assets/01.png" width="49.375%"/><img src=".assets/1x1.gif" width="1.25%"/><img src=".assets/02.png" width="49.375%"/>
 
 <hr>
 
@@ -34,6 +30,6 @@ Petwards, the shelter for fantastic beasts. Enchanted with the Spring Boot frame
 
 ### ER Diagram
 
-<img src=".assets/erd.png" width="100%">
+![](ERD.png)
 
 <hr>
