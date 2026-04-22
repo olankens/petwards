@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  petwards-postgres:
+    image: postgres:16
+    container_name: petwards-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: petwards_db
+      POSTGRES_USER: petwards_user
+      POSTGRES_PASSWORD: petwards_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - petwards-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U petwards_user -d petwards_db" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  petwards-postgres-data:
