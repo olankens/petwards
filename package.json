@@ -12,7 +12,8 @@
     "words": [
       "jsonwebtoken",
       "jjwt",
-      "springdoc"
+      "springdoc",
+      "hmac"
     ]
   },
   "commitlint": {

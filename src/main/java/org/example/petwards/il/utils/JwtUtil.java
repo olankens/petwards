@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import org.example.petwards.dl.entities.Wizard;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -13,10 +14,14 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    private final byte[] secret = "yabadabadoooooooooooooooooooooooooooooo".getBytes();
+    private final byte[] secret;
     private final JwtParser parser;
 
-    public JwtUtil() {
+    public JwtUtil(@Value("${jwt.secret}") String secret) {
+        if (secret.getBytes().length < 32) {
+            throw new IllegalArgumentException("jwt.secret must be at least 32 bytes");
+        }
+        this.secret = secret.getBytes();
         this.parser = Jwts.parser().verifyWith(this.getSecretKey()).build();
     }
 
