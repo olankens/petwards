@@ -1,7 +1,6 @@
 package org.example.petwards.il.utils;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import org.example.petwards.dl.entities.Wizard;
@@ -15,11 +14,9 @@ import java.util.Date;
 public class JwtUtil {
 
     private final byte[] secret = "yabadabadoooooooooooooooooooooooooooooo".getBytes();
-    private final JwtBuilder builder;
     private final JwtParser parser;
 
     public JwtUtil() {
-        this.builder = Jwts.builder().signWith(this.getSecretKey());
         this.parser = Jwts.parser().verifyWith(this.getSecretKey()).build();
     }
 
@@ -29,12 +26,13 @@ public class JwtUtil {
 
     public String generateToken(Wizard wizard) {
         long expireAfter = 96 * 60 * 60 * 1000L;
-        return this.builder
+        return Jwts.builder()
                 .subject(wizard.getUsername())
                 .claim("id", wizard.getId())
                 .claim("role", wizard.getShelterRole())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + expireAfter))
+                .signWith(this.getSecretKey())
                 .compact();
     }
 
