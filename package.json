@@ -8,6 +8,12 @@
   "scripts": {
     "prepare": "simple-git-hooks"
   },
+  "cspell": {
+    "words": [
+      "jsonwebtoken",
+      "jjwt"
+    ]
+  },
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
