@@ -11,7 +11,8 @@
   "cspell": {
     "words": [
       "jsonwebtoken",
-      "jjwt"
+      "jjwt",
+      "springdoc"
     ]
   },
   "commitlint": {

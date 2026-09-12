@@ -20,7 +20,7 @@ public class JwtUtil {
 
     public JwtUtil() {
         this.builder = Jwts.builder().signWith(this.getSecretKey());
-        this.parser = Jwts.parserBuilder().setSigningKey(this.getSecretKey()).build();
+        this.parser = Jwts.parser().verifyWith(this.getSecretKey()).build();
     }
 
     private SecretKey getSecretKey() {
@@ -30,16 +30,16 @@ public class JwtUtil {
     public String generateToken(Wizard wizard) {
         long expireAfter = 96 * 60 * 60 * 1000L;
         return this.builder
-                .setSubject(wizard.getUsername())
+                .subject(wizard.getUsername())
                 .claim("id", wizard.getId())
                 .claim("role", wizard.getShelterRole())
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + expireAfter))
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + expireAfter))
                 .compact();
     }
 
     private Claims getClaims(String token) {
-        return this.parser.parseClaimsJws(token).getBody();
+        return this.parser.parseSignedClaims(token).getPayload();
     }
 
     public String getUsername(String token) {
