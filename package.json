@@ -13,7 +13,8 @@
       "jsonwebtoken",
       "jjwt",
       "springdoc",
-      "hmac"
+      "hmac",
+      "webmvc"
     ]
   },
   "commitlint": {
