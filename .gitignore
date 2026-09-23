@@ -1,0 +1,26 @@
+# JetBrains
+.idea/
+
+# Node
+node_modules/
+package-lock.json
+
+# Spring
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+.DS_Store
+
+# STS
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# Vscode
+.vscode/
