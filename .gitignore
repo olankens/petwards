@@ -1,0 +1,13 @@
+# JetBrains
+.idea/*
+!.idea/runConfigurations
+!.idea/startup.xml
+
+# Junie
+.junie/
+
+# MacOS
+.DS_Store
+
+# Vscode
+.vscode/
