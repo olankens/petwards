@@ -1,0 +1,10 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: false
+  mail:
+    host: localhost
+    port: 0
+    username: test
+    password: test
